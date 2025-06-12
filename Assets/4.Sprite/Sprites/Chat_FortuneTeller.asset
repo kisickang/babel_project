@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!213 &21300000
+Sprite:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Chat_FortuneTeller
+  m_Rect:
+    serializedVersion: 2
+    x: 518
+    y: 0
+    width: 400
+    height: 492.9239
+  m_Offset: {x: 0, y: 0.038047817}
+  m_Border: {x: 0, y: 0, z: 0, w: 0}
+  m_PixelsToUnits: 100
+  m_Pivot: {x: 0.5, y: 0.5000772}
+  m_Extrude: 1
+  m_IsPolygon: 0
+  m_AtlasName:
+  m_PackingTag:
+  m_RenderDataKey:
+    aa6bceda3ae968e4da7017fabd2d86a2: 21300000
+  m_AtlasTags: []
+  m_SpriteAtlas: {fileID: 0}
+  m_RD:
+    serializedVersion: 3
+    texture: {fileID: 2800000, guid: 1b4a952741a712f46b8b99768a5cb087, type: 3}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 156
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 54
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 35002c002b003400330032003100320033002f00320031002e002f00310030002f002d002e002d002f0004002d002e002c002d0004002b002c0004002a002b00040003002a00040029002a00030028002a0029002000280029001f00280020002700260025002300250026002400250023001d00240023001c001d00230022001d002100200021001d001f0020001d001e001f001d0017001e001d001c0017001d001b0017001c000a0017001b0007000a001b0008000a000700100017000a001a00170010000f001a001000190017001a0015001700190014001700150016001700140018001700160015001100140012001400110013001200110010000c000f000d000f000c000e000d000c00080009000a000b000a000900080007000600030001000500040000000300010003000000020001000000
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 54
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 1088
+      _typelessdata: 8fc295bf8fc2553f000000003d0a97bf7b14aebd00000000333393bf0ad7033f000000005c8fa2bf713dcabe00000000713daabfae47d13f00000000295c8fbf85eb51be0000000048e1fa3e8fc21d4000000000713d8a3e8fc21d4000000000a470bd3e1f850340000000001f85eb3e14aef73f00000000f628dc3e6666d63f000000001f85eb3ef628ec3f00000000ec51d83ff6288c3f000000003d0ad73fa4701d3f000000000ad7e33f0000603f000000009a99b93f8fc2753c000000005c8f823ff628cc3f00000000f628fc3fb81e65bf00000000000000409a99a9bf000000000000004085eb81bf00000000e17af43f5c8fd2bf000000001f85eb3f3d0a37bf000000000000004048e1eabf000000008fc2f53f8fc21dc00000000000000040000008c000000000b81ee53f000020bf0000000052b8be3f713dcabe000000008fc2f5bdae471940000000006666e6be5c8f0a4000000000ae4721bfc3f5e8be000000007b142ebf8fc21dc000000000d7a330bfa47015c000000000cdcc4cbf52b8cebf0000000052b85ebfa470adbf000000000ad763bf52b88ebf00000000ec5138bf8fc2e53f00000000ec5138bff6289cbe00000000295c4fbfc3f5283e0000000048e17abf713d9a3f000000005c8f82bfc3f5483f00000000ae4781bf8fc21dc000000000d7a390bfb81ed5bf00000000cdccacbf8fc21dc0000000009a99b9bf7b1416c000000000f628bcbf3333e3bf000000003333d3bf7b14eebe00000000ae47e1bfc3f5f83f00000000c3f5e8bf713d0a3e00000000c3f5e8bf85eb91be00000000d7a3f0bf3333e33f0000000052b8febf295ccf3e00000000000000c052b88e3f00000000000000c07b14ee3e00000000c3f5c8bf48e1eabf000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 518
+      y: 0
+      width: 400
+      height: 492.9239
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: 518, y: 0}
+    settingsRaw: 67
+    uvTransform: {x: 100, y: 718, z: 100, w: 246.5}
+    downscaleMultiplier: 1
+  m_AtlasRD:
+    serializedVersion: 3
+    texture: {fileID: 0}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes: []
+    m_IndexBuffer:
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 0
+      m_Channels: []
+      m_DataSize: 0
+      _typelessdata:
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: 0, y: 0}
+    settingsRaw: 0
+    uvTransform: {x: 0, y: 0, z: 0, w: 0}
+    downscaleMultiplier: 0
+  m_PhysicsShape: []
+  m_Bones: []
+  m_ScriptableObjects: []
+  m_SpriteID:
