@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 3800
+  controlID: 4171
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 3753
+  controlID: 4172
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -221,8 +221,8 @@ MonoBehaviour:
     y: 0
     width: 381
     height: 430
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -650,7 +650,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Particles
@@ -773,9 +773,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 960, y: 72.5, z: 0}
+    m_Target: {x: 960, y: 1030, z: 0}
     speed: 2
-    m_Value: {x: 960, y: 72.5, z: 0}
+    m_Value: {x: 960, y: 1030, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -825,9 +825,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 35.35534
+    m_Target: 103.077644
     speed: 2
-    m_Value: 35.35534
+    m_Value: 103.077644
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -978,7 +978,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 16fbffff4a8c0000648c00008c8c0000
+      m_ExpandedIDs: 24defeff96defeff96e0feffe8e9feff9aeafeff02ebfeff68faffff72faffff0afbffff14fbffff16fbffff228c00008c8c0000a08c0000a48c0000a4b6000050b70000823c0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1047,7 +1047,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/9.Font
+    - Assets/3.Script/Ui
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1055,16 +1055,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/9.Font
+  - Assets/3.Script/Ui
   m_LastFoldersGridSize: 16
   m_LastProjectPath: E:\git\babel_project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 04900000
-    m_LastClickedID: 36868
-    m_ExpandedIDs: 00000000de8f000000ca9a3b
+    m_SelectedIDs: 68400100
+    m_LastClickedID: 82024
+    m_ExpandedIDs: 00000000de8f0000f88f0000fa8f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1119,22 +1119,22 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000ae6d0000b4610000da700000c66b0000a46d00006e750000c88100004ca600003aa40000c4a400006ea6000094a6000000000000aca60000a4a50000b0a500005aac000016a5000058650000e4640000306d0000108400005c9700003a7d0000ac8f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: NewBehaviourScript
+      m_OriginalName: NewBehaviourScript
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 82030
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
