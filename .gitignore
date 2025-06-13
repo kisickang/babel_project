@@ -1,0 +1,26 @@
+# ========== Unity 임시/캐시 폴더 ==========
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild*/
+[Ll]ogs/
+
+# 패키지 매니저 캐시
+[Ll]ibrary/PackageCache/
+
+# 사용자별 에디터 설정
+UserSettings/
+.vscode/
+.idea/
+
+# OS 임시 파일
+.DS_Store
+Thumbs.db
+
+# Visual Studio / Rider 관련
+*.csproj
+*.sln
+*.user
+*.pidb
+*.booproj
+*.svd
