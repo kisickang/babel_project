@@ -118,8 +118,10 @@
 -define:ENABLE_TIMELINE
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
+-define:DOTWEEN
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Demigiant/DOTween/DOTween.dll"
 -r:"Assets/Plugins/I18N.CJK.dll"
 -r:"Assets/Plugins/I18N.dll"
 -r:"Assets/Plugins/I18N.MidEast.dll"
@@ -338,6 +340,7 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
 -r:"Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.4/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-firstpass.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PPv2URPConverters.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PsdPlugin.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Animation.Editor.ref.dll"
@@ -398,6 +401,7 @@
 "Assets/3.Script/Camera/CameraFollow.cs"
 "Assets/3.Script/EffectTester.cs"
 "Assets/3.Script/Player/LevelUpHandler.cs"
+"Assets/3.Script/Player/Move/AttackAnimationController.cs"
 "Assets/3.Script/Player/Move/LookAtMouse.cs"
 "Assets/3.Script/Player/Move/PlayerAnimationController.cs"
 "Assets/3.Script/Player/Move/PlayerControll.cs"

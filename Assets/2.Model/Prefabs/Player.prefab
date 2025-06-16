@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 173704921716697285}
   - component: {fileID: 2937910764297961116}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: glove_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,9 +141,7 @@ GameObject:
   - component: {fileID: 8425284637232178596}
   - component: {fileID: 670500352961381467}
   - component: {fileID: 5803163617865146272}
-  - component: {fileID: 1846793703071831333}
-  - component: {fileID: 165895892633010457}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,9 +161,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 355613531273660970}
   - {fileID: 2884817880431623170}
   - {fileID: 1545548839146238692}
-  - {fileID: 355613531273660970}
   - {fileID: 8254290002542971502}
   - {fileID: 6625513962025296651}
   - {fileID: 6365485044248435492}
@@ -205,70 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6544020566272733728}
---- !u!114 &1846793703071831333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522551324610477029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b4335787e80924d86635ec7c713f05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!212 &165895892633010457
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522551324610477029}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &548570879037910835
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8254290002542971502}
   - component: {fileID: 5477100301883669657}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +765,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858329924402169946}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pos_SmokeFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3206,7 +3140,8 @@ GameObject:
   - component: {fileID: 6544020566272733728}
   - component: {fileID: 5032599100700105602}
   - component: {fileID: 895610528237990616}
-  m_Layer: 7
+  - component: {fileID: 544820992960878466}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3310,6 +3245,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &544820992960878466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369684454624052358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bea6a52f25fc24b9474cf5f229b35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 100
+  maxMP: 100
+  currentMP: 100
 --- !u!1 &2575262411123271484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,7 +3439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5156517301159750272}
   - component: {fileID: 444691050924326485}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3572,7 +3523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5569929405773996689}
   - component: {fileID: 8757273628121090036}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HUD_Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3656,7 +3607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103316570050054833}
   - component: {fileID: 6352782708042963232}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3740,7 +3691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355613531273660970}
   - component: {fileID: 5544484993870396118}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3827,7 +3778,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2556573247910155440}
-  - component: {fileID: 353002571564148338}
   m_Layer: 0
   m_Name: Group_Sprite
   m_TagString: Untagged
@@ -3851,18 +3801,6 @@ Transform:
   - {fileID: 8425284637232178596}
   m_Father: {fileID: 2052459433287410572}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!210 &353002571564148338
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3588754144990659075}
-  m_Enabled: 1
-  m_SortingLayerID: -835318789
-  m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_SortAtRoot: 0
 --- !u!1 &3648040856776747159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,7 +3842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5855468963934755879}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pos_AxeThrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3994,7 +3932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8257946429754461567}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Group_FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4029,7 +3967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6625513962025296651}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4148,7 +4086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966246977623896735}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pos_DamageUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6577,7 +6515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 561599457140565713}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pos_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6694,7 +6632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545548839146238692}
   - component: {fileID: 1923574901713755759}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: leg_up_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9213,7 +9151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4285127127824614760}
   - component: {fileID: 5533085963844678610}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: leg_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9296,7 +9234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8439368385555799331}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pos_AxeSlashFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9444,7 +9382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2884817880431623170}
   - component: {fileID: 8204119617062253976}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: leg_up_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9612,7 +9550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2502696478221398473}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pos_Rotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9984,7 +9922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 195741869790926501}
   - component: {fileID: 4158342194212423221}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10069,7 +10007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5285423543945450967}
   - component: {fileID: 5801355916789540414}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: leg_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}

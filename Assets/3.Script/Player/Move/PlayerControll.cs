@@ -11,7 +11,7 @@ public class PlayerControll : MonoBehaviour
 
     void Awake()
     {
-        rb   = GetComponent<Rigidbody2D>();      
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -24,4 +24,5 @@ public class PlayerControll : MonoBehaviour
         rb.velocity = moveInput.normalized * moveSpeed;
 
     }
+    
 }
