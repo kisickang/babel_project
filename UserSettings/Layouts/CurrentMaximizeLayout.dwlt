@@ -26,7 +26,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 109
+  controlID: 38
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -798,7 +798,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 120
+  controlID: 49
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -863,23 +863,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f0eeffff
-      m_LastClickedID: -4368
-      m_ExpandedIDs: 54a1ffff4ee4ffffa0faffff16fbffff388d0000
+      m_SelectedIDs: 728d0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: MonsterPoolManager
-        m_OriginalName: MonsterPoolManager
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -7090
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -960,7 +960,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/2.Model/Prefabs/Monster
+    - Assets/3.Script/Monster
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -968,16 +968,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/2.Model/Prefabs/Monster
+  - Assets/3.Script/Monster
   m_LastFoldersGridSize: 46
   m_LastProjectPath: E:\git\babel_project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ee940000
-    m_LastClickedID: 38126
-    m_ExpandedIDs: 000000003a9100003c9100003e91000040910000429100004491000046910000489100004a9100004c9100006691000000ca9a3b
+    m_SelectedIDs: a8920000
+    m_LastClickedID: 37544
+    m_ExpandedIDs: 00000000789200007a9200007c9200007e92000080920000829200008492000086920000889200008a920000a492000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1005,7 +1005,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003a9100003c9100003e91000040910000429100004491000046910000489100004a9100004c910000
+    m_ExpandedIDs: 00000000789200007a9200007c9200007e92000080920000829200008492000086920000889200008a920000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1030,8 +1030,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: f0eeffff
-    m_LastClickedInstanceID: -4368
+    m_SelectedInstanceIDs: 728d0000
+    m_LastClickedInstanceID: 36210
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000ae6d0000b4610000da700000c66b0000a46d00006e750000c88100004ca600003aa40000c4a400006ea6000094a60000aca60000a4a50000b0a500005aac000016a5000058650000e4640000306d0000108400005c9700003a7d0000ac8f0000b4bc0000d29b0000d89b0000c4a5000000000000
     m_RenameOverlay:
@@ -1060,7 +1060,7 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 46
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 81
+  m_DirectoriesAreaWidth: 137
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 565
+    m_CachedPref: 253
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
