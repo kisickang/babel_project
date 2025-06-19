@@ -3262,7 +3262,7 @@ MonoBehaviour:
   moveSpeed: 3
   attackDamage: 10
   attackInterval: 1.5
-  attackEffectPrefab: {fileID: 3076111240615964456}
+  attackEffectInstance: {fileID: 3076111240615964456}
   attackEffectSpawnPoint: {fileID: 5156517301159750272}
   spriteAnimator: {fileID: 670500352961381467}
   spriteTransform: {fileID: 8425284637232178596}
@@ -10640,6 +10640,10 @@ PrefabInstance:
     - target: {fileID: 1369463987010114, guid: 240230230fb226b4895f5ae62b96a446, type: 3}
       propertyPath: m_Name
       value: FX_AxeAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369463987010114, guid: 240230230fb226b4895f5ae62b96a446, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4771679120484929, guid: 240230230fb226b4895f5ae62b96a446, type: 3}
       propertyPath: m_LocalPosition.x

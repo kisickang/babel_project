@@ -64,6 +64,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6849571797248580163}
+  - component: {fileID: -2274344622933158248}
   m_Layer: 0
   m_Name: fly_1
   m_TagString: Untagged
@@ -87,6 +88,18 @@ Transform:
   - {fileID: 27928516720751003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2274344622933158248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686436875179731498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ff265245e414748ac8c1783a546f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3027984090097526892
 GameObject:
   m_ObjectHideFlags: 0

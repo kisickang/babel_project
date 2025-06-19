@@ -11,7 +11,8 @@ public class PlayerControll : MonoBehaviour
     [Header("Attack Settings")]
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackInterval = 1.5f;
-    [SerializeField] private GameObject attackEffectPrefab;
+    [SerializeField] private GameObject attackEffectInstance;
+
     [SerializeField] private Transform attackEffectSpawnPoint;
 
     [Header("Animation Target")]
@@ -77,19 +78,28 @@ public class PlayerControll : MonoBehaviour
     {
         Debug.Log($"공격 발생! 데미지: {attackDamage}");
 
-        if (attackEffectPrefab && attackEffectSpawnPoint)
+        if (attackEffectInstance && attackEffectSpawnPoint)
         {
-            // 현재 방향 기준 (scale.x로 판단)
             float facingDirection = Mathf.Sign(spriteTransform.localScale.x);
-
-            // 회전 방향 적용 (Y축 반전으로 Flip)
             Quaternion effectRotation = (facingDirection > 0)
-                ? Quaternion.identity // 오른쪽: 기본 회전
-                : Quaternion.Euler(0, 180f, 0); // 왼쪽: Y축 반전
+                ? Quaternion.identity
+                : Quaternion.Euler(0, 180f, 0);
 
-            Instantiate(attackEffectPrefab, attackEffectSpawnPoint.position, effectRotation);
+            attackEffectInstance.transform.SetPositionAndRotation(attackEffectSpawnPoint.position, effectRotation);
+            attackEffectInstance.SetActive(true);
+
+            StartCoroutine(DisableEffectAfterSeconds(0.5f)); // 이펙트 지속시간만큼 조절
         }
     }
+
+    private IEnumerator DisableEffectAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        if (attackEffectInstance != null)
+            attackEffectInstance.SetActive(false);
+    }
+
+
 
 
     public void BasicAttack_SFX()
