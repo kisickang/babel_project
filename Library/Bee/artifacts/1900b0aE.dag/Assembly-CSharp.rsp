@@ -400,6 +400,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.36f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/3.Script/Camera/CameraFollow.cs"
 "Assets/3.Script/EffectTester.cs"
+"Assets/3.Script/Player/AnimationRelay.cs"
 "Assets/3.Script/Player/LevelUpHandler.cs"
 "Assets/3.Script/Player/Move/AttackAnimationController.cs"
 "Assets/3.Script/Player/Move/LookAtMouse.cs"
