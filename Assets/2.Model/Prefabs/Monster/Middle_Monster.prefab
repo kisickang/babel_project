@@ -357,8 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ff265245e414748ac8c1783a546f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  damage: 10
+  data: {fileID: 11400000, guid: 33b730906df95af41bb345f618f3edcd, type: 2}
   spriteGroup: {fileID: 8746054567901703980}
 --- !u!1 &5449086456799423127
 GameObject:

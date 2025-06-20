@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 public class Monster : MonoBehaviour
 {
-    [Header("몬스터 설정")]
-    [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private int damage = 10;
+    [Header("몬스터 데이터")]
+    [SerializeField] private MonsterData data;
 
     [Header("그래픽 그룹")]
     [Tooltip("Group_Sprite Transform을 할당하세요.")]
@@ -17,6 +16,8 @@ public class Monster : MonoBehaviour
     // ↓ 스프라이트 정렬 관련
     private SpriteRenderer[] spriteRenderers;
     private Dictionary<SpriteRenderer, int> baseOrderOffsets = new();
+
+    private int currentHealth;
 
     void Awake()
     {
@@ -31,6 +32,15 @@ public class Monster : MonoBehaviour
 
         if (spriteGroup == null)
             Debug.LogWarning("[Monster] spriteGroup이 비어 있습니다. Group_Sprite를 연결해주세요.");
+
+        if (data == null)
+        {
+            Debug.LogError("[Monster] MonsterData가 연결되지 않았습니다.");
+            enabled = false;
+            return;
+        }
+
+        currentHealth = data.maxHealth;
     }
 
     void OnEnable()
@@ -51,7 +61,7 @@ public class Monster : MonoBehaviour
 
         // 플레이어 방향으로 이동
         Vector2 direction = (player.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
+        rb.velocity = direction * data.moveSpeed;
 
         // 좌우 반전 (왼쪽이 기본 방향)
         if (spriteGroup != null)
@@ -65,7 +75,6 @@ public class Monster : MonoBehaviour
     {
         // y 좌표 기준으로 order 정렬
         int baseOrder = -(int)(transform.position.y * 100);
-
         foreach (var sr in spriteRenderers)
         {
             sr.sortingOrder = baseOrder + baseOrderOffsets[sr];
@@ -76,10 +85,38 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"플레이어에게 {damage} 데미지 입힘");
+            Debug.Log($"플레이어에게 {data.damage} 데미지 입힘");
 
             // 데미지 로직 추가 시:
-            // other.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+            // other.GetComponent<PlayerHealth>()?.TakeDamage(data.damage);
         }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log($"[{data.monsterName}] 사망");
+
+        // 드랍 아이템 생성
+        if (data.dropItems != null)
+        {
+            foreach (var item in data.dropItems)
+            {
+                if (item != null)
+                    Instantiate(item, transform.position, Quaternion.identity);
+            }
+        }
+
+        // 오브젝트 풀로 되돌리거나 파괴
+        gameObject.SetActive(false);
+        // 또는 Destroy(gameObject);
     }
 }

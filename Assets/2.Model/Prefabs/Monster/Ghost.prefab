@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -2419347568657267625}
   - component: {fileID: -543673455566822502}
   m_Layer: 0
-  m_Name: Ghost
+  m_Name: ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,8 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ff265245e414748ac8c1783a546f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  damage: 10
+  data: {fileID: 11400000, guid: 7e74033eec2cfd54d9a6d82efc19f148, type: 2}
   spriteGroup: {fileID: 223509675266889798}
 --- !u!1 &3822518068996077078
 GameObject:
