@@ -55,7 +55,7 @@ public class MonsterSpawner : MonoBehaviour
 
                 if (monsterParent != null)
                 {
-                    monster.transform.SetParent(monsterParent, true); // ✅ 월드 좌표 유지
+                    monster.transform.SetParent(monsterParent, true); // 월드 좌표 유지
                 }
                 else
                 {
