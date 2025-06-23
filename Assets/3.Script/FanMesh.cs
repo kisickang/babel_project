@@ -1,19 +1,39 @@
 using UnityEngine;
+using DG.Tweening;
 
-[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class FanMesh : MonoBehaviour
 {
-    [Range(0f, 360f)]
-    public float angle = 60f;
+    [Range(0f, 360f)] public float angle = 60f;
     public float radius = 2f;
     public int segments = 20;
 
+    [Header("Effect Settings")]
+    public float duration = 0.25f;
+
     private Mesh mesh;
+    private Material runtimeMat;
+    private Tween tween;
+    private MeshRenderer meshRenderer;
 
     void Awake()
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+
+        meshRenderer = GetComponent<MeshRenderer>();
+        runtimeMat = new Material(meshRenderer.sharedMaterial);
+        meshRenderer.material = runtimeMat;
+    }
+
+    void OnEnable()
+    {
+        // 다시 켜질 때 효과 재시작
+        runtimeMat.SetFloat("_Progress", 0f);
+        DOTween.Kill(this);
+
+        GenerateFan();
+        PlayEffect();
     }
 
     public void GenerateFan()
@@ -45,5 +65,27 @@ public class FanMesh : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+
+        runtimeMat.SetFloat("_BandSize", radius);
+    }
+
+    private void PlayEffect()
+    {
+        tween = DOTween.To(
+            () => 0f,
+            x => runtimeMat.SetFloat("_Progress", x),
+            1f,
+            duration
+        ).SetEase(Ease.Linear)
+         .SetId(this)
+         .OnComplete(() =>
+         {
+             gameObject.SetActive(false); // ✅ 삭제 대신 비활성화로 변경
+         });
+    }
+
+    void OnDisable()
+    {
+        DOTween.Kill(this);
     }
 }

@@ -13,7 +13,6 @@ public class Monster : MonoBehaviour
     private SpriteRenderer[] spriteRenderers;
     private int currentHP;
 
-    private Canvas overlayCanvas;
     [SerializeField] private GameObject damageUIPrefab;
 
     void Awake()
@@ -41,13 +40,6 @@ public class Monster : MonoBehaviour
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null) player = playerObj.transform;
         }
-
-        if (overlayCanvas == null)
-        {
-            overlayCanvas = FindObjectOfType<Canvas>();
-            if (overlayCanvas == null || overlayCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
-                Debug.LogWarning("Screen Space - Overlay Canvas를 찾을 수 없습니다.");
-        }
     }
 
     void Update()
@@ -68,24 +60,26 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"플레이어에게 {data.damage} 데미지 입힘");
+            PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
+            if (playerStatus != null)
+            {
+                Debug.Log($"[히트] Player가 {data.monsterName}에게 {data.damage} 데미지를 입음");
+                playerStatus.TakeDamage(data.damage);
+            }
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
 
+        Vector3 popupPos = GetPopupPosition();
+        GameObject popup = Instantiate(damageUIPrefab, popupPos, Quaternion.identity);
+        popup.GetComponent<DamagePopup>()?.Show(damage);
 
-public void TakeDamage(int damage)
-{
-    currentHP -= damage;
-
-    Vector3 popupPos = GetPopupPosition(); // 머리 위 위치 계산
-    GameObject popup = Instantiate(damageUIPrefab, popupPos, Quaternion.identity);
-    popup.GetComponent<DamagePopup>()?.Show(damage); // 애니메이션 재생
-
-    if (currentHP <= 0)
-        Die();
-}
-
+        if (currentHP <= 0)
+            Die();
+    }
 
     private void Die()
     {
@@ -102,27 +96,16 @@ public void TakeDamage(int damage)
 
         gameObject.SetActive(false); // 풀로 복귀
     }
+
     private Vector3 GetPopupPosition()
     {
         SpriteRenderer sr = spriteGroup.GetComponentInChildren<SpriteRenderer>();
         if (sr != null)
         {
             Bounds bounds = sr.bounds;
-            return new Vector3(bounds.center.x, bounds.max.y + 0.2f, 0f); // 머리 위
+            return new Vector3(bounds.center.x, bounds.max.y + 0.2f, 0f);
         }
 
-        return transform.position + Vector3.up * 1.5f; // fallback
-    }
-    private Vector3 GetPopupLocalOffset()
-    {
-        SpriteRenderer sr = spriteGroup.GetComponentInChildren<SpriteRenderer>();
-        if (sr != null)
-        {
-            Bounds bounds = sr.bounds;
-            Vector3 localOffset = spriteGroup.InverseTransformPoint(new Vector3(bounds.center.x, bounds.max.y + 0.2f, 0f));
-            return localOffset;
-        }
-
-        return new Vector3(0f, 1.5f, 0f); // fallback
+        return transform.position + Vector3.up * 1.5f;
     }
 }

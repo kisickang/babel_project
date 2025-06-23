@@ -5,8 +5,8 @@ using System.Collections;
 public class DamagePopup : MonoBehaviour
 {
     [SerializeField] private TextMeshPro text;
-    [SerializeField] private float moveY = 1.5f;
-    [SerializeField] private float duration = 1f;
+    [SerializeField] private float moveY = 0.5f;      // 인스펙터에서 조절 가능
+    [SerializeField] private float duration = 0.5f;   // 짧은 시간 동안
 
     public void Show(int damage)
     {
