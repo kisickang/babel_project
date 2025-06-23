@@ -1974,6 +1974,11 @@ MonoBehaviour:
   playerDamageUIPrefab: {fileID: 4811486901367239786, guid: 46b325b80d4b0ae4faa622e7acc3b163, type: 3}
   spriteGroup: {fileID: 2556573248136950952}
   popupYOffset: 0.3
+  hpRecoverAmount: 5
+  hpRecoverInterval: 3
+  hpEffect: {fileID: 4571377770846977929}
+  mpRecoverAmount: 10
+  mpRecoverInterval: 1
 --- !u!1 &548570879280680747
 GameObject:
   m_ObjectHideFlags: 0

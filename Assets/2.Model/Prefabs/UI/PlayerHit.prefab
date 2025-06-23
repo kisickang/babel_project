@@ -95,6 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 702730799698515507}
   - component: {fileID: 5132594835179650297}
+  - component: {fileID: 621823794476892586}
   m_Layer: 0
   m_Name: PlayerHit
   m_TagString: Untagged
@@ -133,6 +134,18 @@ MonoBehaviour:
   text: {fileID: 6218266689146761411}
   moveY: 0.5
   duration: 1
+--- !u!210 &621823794476892586
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4811486901367239786}
+  m_Enabled: 1
+  m_SortingLayerID: 1589022169
+  m_SortingLayer: 1
+  m_SortingOrder: 50
+  m_SortAtRoot: 1
 --- !u!1 &7887418148455615669
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +204,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4380353927038373066, guid: 8bda3fb45bbb18c46ac23054aa55bfc2, type: 2}
+  - {fileID: 2100000, guid: 3c996278fa59f314f9b5b9bd9a833a45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +249,7 @@ MonoBehaviour:
   m_text: 123
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8bda3fb45bbb18c46ac23054aa55bfc2, type: 2}
-  m_sharedMaterial: {fileID: -4380353927038373066, guid: 8bda3fb45bbb18c46ac23054aa55bfc2, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 3c996278fa59f314f9b5b9bd9a833a45, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
@@ -19,6 +20,56 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private GameObject playerDamageUIPrefab;
     [SerializeField] private Transform spriteGroup;
     [SerializeField] private float popupYOffset = 0.3f; // 오프셋 조절 가능
+    [Header("Recovery Settings")]
+    [SerializeField] private float hpRecoverAmount = 5f;
+    [SerializeField] private float hpRecoverInterval = 3f;
+    [SerializeField] private ParticleSystem hpEffect;
+
+
+    [SerializeField] private float mpRecoverAmount = 10f;
+    [SerializeField] private float mpRecoverInterval = 1f;
+    void Start()
+    {
+        StartCoroutine(HpRecoverRoutine());
+        StartCoroutine(MpRecoverRoutine());
+    }
+    private IEnumerator HpRecoverRoutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(hpRecoverInterval);
+        while (true)
+        {
+            yield return wait;
+
+            if (currentHP < maxHP)
+            {
+                currentHP = Mathf.Min(currentHP + hpRecoverAmount, maxHP);
+
+                if (hpEffect != null)
+                {
+                    if (!hpEffect.gameObject.activeSelf)
+                        hpEffect.gameObject.SetActive(true);
+
+                    hpEffect.Play();
+                }
+
+            }
+        }
+    }
+
+
+    private IEnumerator MpRecoverRoutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(mpRecoverInterval);
+        while (true)
+        {
+            yield return wait;
+
+            if (currentMP < maxMP)
+            {
+                currentMP = Mathf.Min(currentMP + mpRecoverAmount, maxMP);
+            }
+        }
+    }
 
     private void OnValidate()
     {
