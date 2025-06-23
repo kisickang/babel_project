@@ -94,6 +94,7 @@ public class Monster : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        Debug.Log($"[몬스터] {name}이 데미지 {amount}를 받음");
         currentHealth -= amount;
         if (currentHealth <= 0)
         {

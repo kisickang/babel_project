@@ -12,12 +12,15 @@ public class PlayerControll : MonoBehaviour
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackInterval = 1.5f;
     [SerializeField] private GameObject attackEffectInstance;
-
     [SerializeField] private Transform attackEffectSpawnPoint;
 
+    [Header("Attack Area (Fan Shape)")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float attackAngle = 60f;
+
     [Header("Animation Target")]
-    [Tooltip("실제 애니메이션이 재생되는 Sprite의 Animator")]
-    [SerializeField] private Animator spriteAnimator; // <- 여기!
+    [SerializeField] private Animator spriteAnimator;
 
     [Header("Mouse Flip")]
     [SerializeField] private Transform spriteTransform;
@@ -35,7 +38,6 @@ public class PlayerControll : MonoBehaviour
         if (spriteTransform == null)
             spriteTransform = transform;
 
-        // Animator가 null이면 자식에서 자동으로 찾도록 fallback
         if (spriteAnimator == null)
             spriteAnimator = GetComponentInChildren<Animator>();
     }
@@ -73,7 +75,6 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
-    // Sprite 오브젝트에서 호출되는 함수니까 [MessageReceiver] 역할
     public void ApplyAttack()
     {
         Debug.Log($"공격 발생! 데미지: {attackDamage}");
@@ -87,10 +88,37 @@ public class PlayerControll : MonoBehaviour
 
             attackEffectInstance.transform.SetPositionAndRotation(attackEffectSpawnPoint.position, effectRotation);
             attackEffectInstance.SetActive(true);
+            StartCoroutine(DisableEffectAfterSeconds(0.5f));
+        }
 
-            StartCoroutine(DisableEffectAfterSeconds(0.5f)); // 이펙트 지속시간만큼 조절
+        PerformFanShapedAttack(); // ✅ 공격 판정 호출
+    }
+
+    private void PerformFanShapedAttack()
+    {
+        Vector2 origin = attackPoint.position;
+        Vector2 forward = attackPoint.right;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackRange);
+
+        foreach (var hit in hits)
+        {
+            // 부모에 Monster 스크립트가 있는지 확인
+            Monster monster = hit.GetComponentInParent<Monster>();
+            if (monster != null)
+            {
+                Vector2 toTarget = (Vector2)hit.transform.position - origin;
+                float angle = Vector2.Angle(forward, toTarget);
+
+                if (angle <= attackAngle / 2f)
+                {
+                    Debug.Log($"[히트] {hit.name} 몬스터가 부채꼴 범위에 감지됨!");
+                    monster.TakeDamage(attackDamage);
+                }
+            }
         }
     }
+
 
     private IEnumerator DisableEffectAfterSeconds(float seconds)
     {
@@ -98,9 +126,6 @@ public class PlayerControll : MonoBehaviour
         if (attackEffectInstance != null)
             attackEffectInstance.SetActive(false);
     }
-
-
-
 
     public void BasicAttack_SFX()
     {
