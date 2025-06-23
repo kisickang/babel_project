@@ -24,17 +24,22 @@ public class FanMesh : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         runtimeMat = new Material(meshRenderer.sharedMaterial);
         meshRenderer.material = runtimeMat;
+
+        runtimeMat.SetFloat("_Progress", 0f);  // ← 여기서 초기화 확정!
     }
+
 
     void OnEnable()
     {
-        // 다시 켜질 때 효과 재시작
-        runtimeMat.SetFloat("_Progress", 0f);
+        runtimeMat.SetFloat("_Progress", 0f); // ✅ 꼭 필요!
+        runtimeMat.SetFloat("_BandSize", radius);
+
         DOTween.Kill(this);
 
         GenerateFan();
         PlayEffect();
     }
+
 
     public void GenerateFan()
     {
@@ -69,18 +74,26 @@ public class FanMesh : MonoBehaviour
         runtimeMat.SetFloat("_BandSize", radius);
     }
 
-    private void PlayEffect()
+    void PlayEffect()
     {
+        //Debug.Log("[FanMesh] PlayEffect 시작");
+
+        runtimeMat.SetFloat("_Progress", 0f); // ← 다시한번 강제
         tween = DOTween.To(
             () => 0f,
-            x => runtimeMat.SetFloat("_Progress", x),
+            x =>
+            {
+                runtimeMat.SetFloat("_Progress", x);
+                //Debug.Log($"[FanMesh] Progress: {x}");
+            },
             1f,
             duration
         ).SetEase(Ease.Linear)
          .SetId(this)
          .OnComplete(() =>
          {
-             gameObject.SetActive(false); // ✅ 삭제 대신 비활성화로 변경
+             //Debug.Log("[FanMesh] DOTween Complete → SetActive(false)");
+             gameObject.SetActive(false);
          });
     }
 
@@ -88,4 +101,6 @@ public class FanMesh : MonoBehaviour
     {
         DOTween.Kill(this);
     }
+
+
 }

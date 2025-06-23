@@ -689,7 +689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &722122146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,7 +1672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2002914357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2157,7 +2157,7 @@ MonoBehaviour:
   attackInterval: 1
   attackEffectInstance: {fileID: 3076111240843202352}
   attackEffectSpawnPoint: {fileID: 5156517300379306648}
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 561599457433601737}
   attackRange: 5
   attackAngle: 60
   fanVisualPrefab: {fileID: 3981099373801053164, guid: 191e8a414895e6d42bd596d777237077, type: 3}

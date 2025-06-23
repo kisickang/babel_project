@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerControll : MonoBehaviour
@@ -28,6 +30,23 @@ public class PlayerControll : MonoBehaviour
     [SerializeField] private Camera targetCamera;
 
     private bool isAttacking = false;
+    private bool isFanEffectRunning = false; // 중복 생성 방지용
+    private Coroutine attackRoutine;
+
+    void Start()
+    {
+        if (attackRoutine == null)
+            attackRoutine = StartCoroutine(AutoAttackRoutine());
+    }
+    void OnDisable()
+    {
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
+    }
+
 
     void Awake()
     {
@@ -37,10 +56,6 @@ public class PlayerControll : MonoBehaviour
         if (spriteAnimator == null) spriteAnimator = GetComponentInChildren<Animator>();
     }
 
-    void Start()
-    {
-        StartCoroutine(AutoAttackRoutine());
-    }
 
     void Update()
     {
@@ -65,7 +80,7 @@ public class PlayerControll : MonoBehaviour
             if (spriteAnimator != null)
                 spriteAnimator.SetTrigger("Attack");
 
-            ApplyAttack();
+            //ApplyAttack();
             yield return new WaitForSeconds(attackInterval);
         }
     }
@@ -94,28 +109,37 @@ public class PlayerControll : MonoBehaviour
         if (attackPoint == null) return;
 
         Vector2 origin = attackPoint.position;
-        Vector2 forward = attackPoint.right;
+        Vector2 mouseWorld = targetCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 forward = (mouseWorld - origin).normalized;
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackRange);
+        HashSet<Monster> damagedMonsters = new HashSet<Monster>();
 
         foreach (var hit in hits)
         {
             Monster monster = hit.GetComponentInParent<Monster>();
-            if (monster != null)
+            if (monster != null && !damagedMonsters.Contains(monster))
             {
                 Vector2 toTarget = (Vector2)hit.transform.position - origin;
                 float angle = Vector2.Angle(forward, toTarget);
 
                 if (angle <= attackAngle / 2f)
                 {
-                    Debug.Log($"[Hit] {hit.name} 몬스터가 부채꼴 범위에 감지됨!");
+                    damagedMonsters.Add(monster); // ✅ 이 시점에 추가
                     monster.TakeDamage(attackDamage);
+                    Debug.Log($"[Hit] {monster.name} 데미지 적용");
                 }
             }
         }
     }
 
+
+
     private IEnumerator PlayFanVisual()
     {
+        if (isFanEffectRunning) yield break; // 이미 실행 중이면 종료
+        isFanEffectRunning = true;
+
         if (fanVisualPrefab == null || attackPoint == null) yield break;
 
         Vector3 mouseWorld = targetCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -126,14 +150,16 @@ public class PlayerControll : MonoBehaviour
         FanMesh mesh = visual.GetComponent<FanMesh>();
         if (mesh != null)
         {
-            mesh.radius = attackRange; // 자동 반영됨
+            mesh.radius = attackRange;
             mesh.angle = attackAngle;
             mesh.duration = 0.25f;
             mesh.GenerateFan();
         }
 
-        yield return null;
+        yield return new WaitForSeconds(0.3f); // 이펙트가 다 끝날 때까지 기다리기
+        isFanEffectRunning = false;
     }
+
 
     private IEnumerator DisableEffectAfterSeconds(float seconds)
     {

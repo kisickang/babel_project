@@ -2,14 +2,13 @@ Shader "Custom/FanFadeShader"
 {
     Properties
     {
-        _Color("Color", Color) = (1, 0.5, 0, 1)
-        _Progress("Progress", Range(0,1)) = 0
-        _BandSize("Band Size", Float) = 1
+        _Color ("Color", Color) = (1, 0.7, 0.3, 1)
+        _Progress ("Progress", Range(0, 1)) = 0
+        _BandSize ("Band Size", Float) = 5
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
-        LOD 200
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
         Cull Off
@@ -28,33 +27,28 @@ Shader "Custom/FanFadeShader"
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 localPos : TEXCOORD0;
             };
 
-            v2f vert(appdata v)
+            v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.localPos = v.vertex.xy;
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
-                float dist = i.uv.y;
-                float start = _Progress;
-                float end = _Progress + (_BandSize * 0.01); // 0~1 정규화
+                float dist = length(i.localPos);
+                float fade = saturate(1 - (_Progress - dist / _BandSize) * 10);
 
-                float visible = step(start, dist) * (1.0 - step(end, dist));
-                fixed4 col = _Color;
-                col.a *= visible;
-                return col;
+                return fixed4(_Color.rgb, _Color.a * fade);
             }
             ENDCG
         }
