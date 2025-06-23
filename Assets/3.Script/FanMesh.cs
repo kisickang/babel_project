@@ -1,45 +1,49 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshFilter))]
 public class FanMesh : MonoBehaviour
 {
-    public float radius = 2f;
+    [Range(0f, 360f)]
     public float angle = 60f;
+    public float radius = 2f;
     public int segments = 20;
 
-    void Start()
+    private Mesh mesh;
+
+    void Awake()
     {
-        GenerateFanMesh();
+        mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
     }
 
-    void GenerateFanMesh()
+    public void GenerateFan()
     {
-        Mesh mesh = new Mesh();
+        mesh.Clear();
 
-        Vector3[] vertices = new Vector3[segments + 2];
+        int vertCount = segments + 2;
+        Vector3[] vertices = new Vector3[vertCount];
         int[] triangles = new int[segments * 3];
 
         vertices[0] = Vector3.zero;
 
-        float deltaAngle = angle / segments;
+        float angleStep = angle / segments;
         for (int i = 0; i <= segments; i++)
         {
-            float currentAngle = -angle / 2f + deltaAngle * i;
+            float currentAngle = -angle / 2f + angleStep * i;
             float rad = currentAngle * Mathf.Deg2Rad;
             vertices[i + 1] = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f) * radius;
         }
 
         for (int i = 0; i < segments; i++)
         {
-            triangles[i * 3 + 0] = 0;
-            triangles[i * 3 + 1] = i + 1;
-            triangles[i * 3 + 2] = i + 2;
+            int idx = i * 3;
+            triangles[idx] = 0;
+            triangles[idx + 1] = i + 1;
+            triangles[idx + 2] = i + 2;
         }
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
-
-        GetComponent<MeshFilter>().mesh = mesh;
     }
 }

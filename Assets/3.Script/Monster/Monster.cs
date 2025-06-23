@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class Monster : MonoBehaviour
 {
@@ -7,51 +6,47 @@ public class Monster : MonoBehaviour
     [SerializeField] private MonsterData data;
 
     [Header("그래픽 그룹")]
-    [Tooltip("Group_Sprite Transform을 할당하세요.")]
     [SerializeField] private Transform spriteGroup;
 
     private Transform player;
     private Rigidbody2D rb;
-
-    // ↓ 스프라이트 정렬 관련
     private SpriteRenderer[] spriteRenderers;
-    private Dictionary<SpriteRenderer, int> baseOrderOffsets = new();
+    private int currentHP;
 
-    private int currentHealth;
+    private Canvas overlayCanvas;
+    [SerializeField] private GameObject damageUIPrefab;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // SpriteRenderer 추적
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach (var sr in spriteRenderers)
-        {
-            baseOrderOffsets[sr] = sr.sortingOrder;
-        }
 
         if (spriteGroup == null)
-            Debug.LogWarning("[Monster] spriteGroup이 비어 있습니다. Group_Sprite를 연결해주세요.");
+            Debug.LogWarning("[Monster] spriteGroup이 비어 있습니다.");
 
         if (data == null)
         {
-            Debug.LogError("[Monster] MonsterData가 연결되지 않았습니다.");
+            Debug.LogError("[Monster] MonsterData 연결 안됨");
             enabled = false;
             return;
         }
-
-        currentHealth = data.maxHealth;
     }
 
     void OnEnable()
     {
+        currentHP = data.maxHealth;
+
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-                player = playerObj.transform;
-            else
-                Debug.LogError("[Monster] Player를 찾을 수 없습니다. 태그를 'Player'로 지정해주세요.");
+            if (playerObj != null) player = playerObj.transform;
+        }
+
+        if (overlayCanvas == null)
+        {
+            overlayCanvas = FindObjectOfType<Canvas>();
+            if (overlayCanvas == null || overlayCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
+                Debug.LogWarning("Screen Space - Overlay Canvas를 찾을 수 없습니다.");
         }
     }
 
@@ -59,25 +54,13 @@ public class Monster : MonoBehaviour
     {
         if (player == null) return;
 
-        // 플레이어 방향으로 이동
-        Vector2 direction = (player.position - transform.position).normalized;
-        rb.velocity = direction * data.moveSpeed;
+        Vector2 dir = (player.position - transform.position).normalized;
+        rb.velocity = dir * data.moveSpeed;
 
-        // 좌우 반전 (왼쪽이 기본 방향)
         if (spriteGroup != null)
         {
             float scaleX = (player.position.x > transform.position.x) ? -1f : 1f;
             spriteGroup.localScale = new Vector3(scaleX, 1f, 1f);
-        }
-    }
-
-    void LateUpdate()
-    {
-        // y 좌표 기준으로 order 정렬
-        int baseOrder = -(int)(transform.position.y * 100);
-        foreach (var sr in spriteRenderers)
-        {
-            sr.sortingOrder = baseOrder + baseOrderOffsets[sr];
         }
     }
 
@@ -86,27 +69,28 @@ public class Monster : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log($"플레이어에게 {data.damage} 데미지 입힘");
-
-            // 데미지 로직 추가 시:
-            // other.GetComponent<PlayerHealth>()?.TakeDamage(data.damage);
         }
     }
 
-    public void TakeDamage(int amount)
-    {
-        Debug.Log($"[몬스터] {name}이 데미지 {amount}를 받음");
-        currentHealth -= amount;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
+
+
+public void TakeDamage(int damage)
+{
+    currentHP -= damage;
+
+    Vector3 popupPos = GetPopupPosition(); // 머리 위 위치 계산
+    GameObject popup = Instantiate(damageUIPrefab, popupPos, Quaternion.identity);
+    popup.GetComponent<DamagePopup>()?.Show(damage); // 애니메이션 재생
+
+    if (currentHP <= 0)
+        Die();
+}
+
 
     private void Die()
     {
         Debug.Log($"[{data.monsterName}] 사망");
 
-        // 드랍 아이템 생성
         if (data.dropItems != null)
         {
             foreach (var item in data.dropItems)
@@ -116,8 +100,29 @@ public class Monster : MonoBehaviour
             }
         }
 
-        // 오브젝트 풀로 되돌리거나 파괴
-        gameObject.SetActive(false);
-        // 또는 Destroy(gameObject);
+        gameObject.SetActive(false); // 풀로 복귀
+    }
+    private Vector3 GetPopupPosition()
+    {
+        SpriteRenderer sr = spriteGroup.GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            Bounds bounds = sr.bounds;
+            return new Vector3(bounds.center.x, bounds.max.y + 0.2f, 0f); // 머리 위
+        }
+
+        return transform.position + Vector3.up * 1.5f; // fallback
+    }
+    private Vector3 GetPopupLocalOffset()
+    {
+        SpriteRenderer sr = spriteGroup.GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            Bounds bounds = sr.bounds;
+            Vector3 localOffset = spriteGroup.InverseTransformPoint(new Vector3(bounds.center.x, bounds.max.y + 0.2f, 0f));
+            return localOffset;
+        }
+
+        return new Vector3(0f, 1.5f, 0f); // fallback
     }
 }

@@ -18,28 +18,28 @@ public class MonsterPoolManager : MonoBehaviour
 
     public Transform poolParent; // Inspector에서 빈 오브젝트 할당
 
-void Awake()
-{
-    Instance = this;
-    poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-    foreach (var pool in pools)
+    void Awake()
     {
-        Queue<GameObject> objectPool = new Queue<GameObject>();
-        for (int i = 0; i < pool.size; i++)
+        Instance = this;
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+        foreach (var pool in pools)
         {
-            GameObject obj = Instantiate(pool.prefab);
-            obj.SetActive(false);
+            Queue<GameObject> objectPool = new Queue<GameObject>();
+            for (int i = 0; i < pool.size; i++)
+            {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
 
-            // ✅ 생성 시 정리용 부모에 넣기
-            if (poolParent != null)
-                obj.transform.SetParent(poolParent);
+                // ✅ 생성 시 정리용 부모에 넣기
+                if (poolParent != null)
+                    obj.transform.SetParent(poolParent);
 
-            objectPool.Enqueue(obj);
+                objectPool.Enqueue(obj);
+            }
+            poolDictionary.Add(pool.tag, objectPool);
         }
-        poolDictionary.Add(pool.tag, objectPool);
     }
-}
 
 
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
@@ -54,4 +54,13 @@ void Awake()
         poolDictionary[tag].Enqueue(obj);
         return obj;
     }
+    public void ShowDamagePopup(Vector3 position, int damage)
+{
+    GameObject obj = SpawnFromPool("DamagePopup", position, Quaternion.identity);
+    if (obj != null)
+    {
+        obj.GetComponent<DamagePopup>().Show(damage);
+    }
+}
+
 }

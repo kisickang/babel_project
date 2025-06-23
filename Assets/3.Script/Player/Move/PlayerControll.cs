@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerControll : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerControll : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackAngle = 60f;
+    [SerializeField] private GameObject fanVisualObject;
 
     [Header("Animation Target")]
     [SerializeField] private Animator spriteAnimator;
@@ -31,15 +33,9 @@ public class PlayerControll : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        if (targetCamera == null)
-            targetCamera = Camera.main;
-
-        if (spriteTransform == null)
-            spriteTransform = transform;
-
-        if (spriteAnimator == null)
-            spriteAnimator = GetComponentInChildren<Animator>();
+        if (targetCamera == null) targetCamera = Camera.main;
+        if (spriteTransform == null) spriteTransform = transform;
+        if (spriteAnimator == null) spriteAnimator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -65,7 +61,6 @@ public class PlayerControll : MonoBehaviour
     private IEnumerator AutoAttackRoutine()
     {
         isAttacking = true;
-
         while (isAttacking)
         {
             if (spriteAnimator != null)
@@ -79,6 +74,13 @@ public class PlayerControll : MonoBehaviour
     {
         Debug.Log($"공격 발생! 데미지: {attackDamage}");
 
+        // 시각적 부채꼴 이펙트 보여주기
+        ShowFanVisual();
+
+        // 공격 판정
+        PerformFanShapedAttack();
+
+        // 이펙트 실행
         if (attackEffectInstance && attackEffectSpawnPoint)
         {
             float facingDirection = Mathf.Sign(spriteTransform.localScale.x);
@@ -90,20 +92,16 @@ public class PlayerControll : MonoBehaviour
             attackEffectInstance.SetActive(true);
             StartCoroutine(DisableEffectAfterSeconds(0.5f));
         }
-
-        PerformFanShapedAttack(); // ✅ 공격 판정 호출
     }
 
     private void PerformFanShapedAttack()
     {
         Vector2 origin = attackPoint.position;
         Vector2 forward = attackPoint.right;
-
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackRange);
 
         foreach (var hit in hits)
         {
-            // 부모에 Monster 스크립트가 있는지 확인
             Monster monster = hit.GetComponentInParent<Monster>();
             if (monster != null)
             {
@@ -119,6 +117,39 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
+    private void ShowFanVisual()
+    {
+        if (fanVisualObject == null) return;
+
+        // FanMesh 값 동기화
+        FanMesh mesh = fanVisualObject.GetComponent<FanMesh>();
+        if (mesh != null)
+        {
+            mesh.radius = attackRange;
+            mesh.angle = attackAngle;
+            mesh.GenerateFan();
+        }
+
+        // 위치 및 방향
+        Vector3 mouseWorld = targetCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (mouseWorld - attackPoint.position).normalized;
+        float angleZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        fanVisualObject.transform.position = attackPoint.position;
+        fanVisualObject.transform.rotation = Quaternion.Euler(0, 0, angleZ);
+
+        // DOTween 애니메이션
+        DOTween.Kill(fanVisualObject.transform);
+        fanVisualObject.transform.localScale = Vector3.zero;
+        fanVisualObject.SetActive(true);
+        fanVisualObject.transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            fanVisualObject.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                fanVisualObject.SetActive(false);
+            });
+        });
+    }
 
     private IEnumerator DisableEffectAfterSeconds(float seconds)
     {
@@ -130,6 +161,5 @@ public class PlayerControll : MonoBehaviour
     public void BasicAttack_SFX()
     {
         Debug.Log("공격 사운드 실행");
-        // AudioManager.Instance.Play("Attack"); 등으로 연동 가능
     }
 }

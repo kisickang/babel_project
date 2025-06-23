@@ -414,6 +414,7 @@
 "Assets/3.Script/Player/StatusUi/RecoveryController.cs"
 "Assets/3.Script/Player/StatusUi/StatusUIManager.cs"
 "Assets/3.Script/Ui/CountdownTimer.cs"
+"Assets/3.Script/Ui/DamagePopup.cs"
 "Assets/MonsterData/MonsterData.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"

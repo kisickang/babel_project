@@ -539,6 +539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 926129843d03e8c4e953d0bc04269f7b, type: 2}
   spriteGroup: {fileID: 6295002243472791226}
+  damageUIPrefab: {fileID: 5062117107659624300, guid: 2badda226bf1ab3438460b6b70e71b3b, type: 3}
 --- !u!1 &7676302250809201619
 GameObject:
   m_ObjectHideFlags: 0
