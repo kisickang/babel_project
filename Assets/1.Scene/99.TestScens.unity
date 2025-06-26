@@ -1561,6 +1561,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553688056}
   m_CullTransparentMesh: 1
+--- !u!1 &1700915571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1700915573}
+  - component: {fileID: 1700915572}
+  m_Layer: 0
+  m_Name: SkillPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1700915572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700915571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cb68e4cdae9af48a9096d0ceb28e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8104695266530542792, guid: 14ea9ac994911ff43a6553eceb147247, type: 3}
+  poolSize: 10
+  poolParent: {fileID: 1700915573}
+--- !u!4 &1700915573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700915571}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709970830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2216,13 @@ MonoBehaviour:
   spriteAnimator: {fileID: 670500353808147523}
   spriteTransform: {fileID: 8425284638062937532}
   targetCamera: {fileID: 485159102}
+  projectilePrefab: {fileID: 7315828486042252618}
+  projectileParent: {fileID: 1700915573}
+  projectileSpawnPoint: {fileID: 561599457433601737}
+  axeThrowFXObject: {fileID: 7315828486042252618}
+  axeThrowFXDuration: 0.1
+  projectileSpeed: 10
+  playerStatus: {fileID: 544820992112883610}
 --- !u!1 &912046977406597242
 GameObject:
   m_ObjectHideFlags: 0
@@ -11501,13 +11555,26 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2934208219522331108}
+  - component: {fileID: 7315828486042252619}
   m_Layer: 0
   m_Name: FX_AxeThrowing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!210 &7315828486042252619
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7315828486042252618}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1 &7320322158371862511
 GameObject:
   m_ObjectHideFlags: 0
@@ -12765,3 +12832,4 @@ SceneRoots:
   - {fileID: 722122147}
   - {fileID: 2002914358}
   - {fileID: 803570880}
+  - {fileID: 1700915573}

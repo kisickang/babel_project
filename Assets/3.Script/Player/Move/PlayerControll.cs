@@ -28,6 +28,14 @@ public class PlayerControll : MonoBehaviour
     [Header("Mouse Flip")]
     [SerializeField] private Transform spriteTransform;
     [SerializeField] private Camera targetCamera;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileParent;
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private GameObject axeThrowFXObject;
+    [SerializeField] private float axeThrowFXDuration = 0.4f;
+    [SerializeField] private float projectileSpeed = 10f;
+
+    [SerializeField] private PlayerStatus playerStatus;
 
     private bool isAttacking = false;
     private bool isFanEffectRunning = false; // 중복 생성 방지용
@@ -65,6 +73,9 @@ public class PlayerControll : MonoBehaviour
         Vector3 mouseWorld = targetCamera.ScreenToWorldPoint(Input.mousePosition);
         float direction = mouseWorld.x < transform.position.x ? 1f : -1f;
         spriteTransform.localScale = new Vector3(direction, spriteTransform.localScale.y, spriteTransform.localScale.z);
+        // 특수스킬 발동 (우클릭)
+        if (Input.GetMouseButtonDown(1))
+            TryUseSkill();
     }
 
     void FixedUpdate()
@@ -133,8 +144,6 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
-
-
     private IEnumerator PlayFanVisual()
     {
         if (isFanEffectRunning) yield break; // 이미 실행 중이면 종료
@@ -172,4 +181,62 @@ public class PlayerControll : MonoBehaviour
     {
         Debug.Log("공격 사운드 실행");
     }
+
+    void TryUseSkill()
+    {
+        if (playerStatus.CurrentMP >= 30f)
+        {
+            playerStatus.currentMP -= 30f;
+
+            Vector3 spawnPos = projectileSpawnPoint.position;
+            Vector3 mousePos = targetCamera.ScreenToWorldPoint(Input.mousePosition);
+
+            // 이펙트 출력 (위치 + 회전 포함)
+            PlayAxeThrowFX(spawnPos, mousePos);
+
+            Vector2 dir = (mousePos - spawnPos).normalized;
+
+            GameObject proj = AxePoolManager.Instance.Get();
+            proj.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
+            proj.SetActive(true);
+
+            proj.GetComponent<ProjectileAxe>().Initialize(dir, projectileSpeed, attackDamage * 2);
+        }
+        else
+        {
+            Debug.Log("마나 부족!");
+        }
+    }
+
+    private IEnumerator DisableAxeThrowFXAfterDelay()
+    {
+        yield return new WaitForSeconds(axeThrowFXDuration);
+        if (axeThrowFXObject != null)
+            axeThrowFXObject.SetActive(false);
+    }
+    private void PlayAxeThrowFX(Vector3 spawnPos, Vector3 mouseWorld)
+    {
+        if (axeThrowFXObject == null) return;
+
+        Vector2 dir = (mouseWorld - spawnPos).normalized;
+        float angleZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // 💡 회전값 먼저 적용
+        axeThrowFXObject.transform.rotation = Quaternion.Euler(0, 0, angleZ);
+
+        // 💡 회전 기준으로 오른쪽 방향 * 1.5 만큼 offset
+        Vector3 offset = axeThrowFXObject.transform.right * 1.5f;
+        Vector3 finalPos = spawnPos + offset;
+
+        axeThrowFXObject.transform.position = finalPos;
+
+        axeThrowFXObject.SetActive(false); // 초기화
+        axeThrowFXObject.SetActive(true);
+
+        StartCoroutine(DisableAxeThrowFXAfterDelay());
+    }
+
+
+
+
 }
