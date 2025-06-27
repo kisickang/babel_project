@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b579a5ebe6c88a7438dcd2e6e0208bb4, type: 3}
+  m_Name: PlayerExpData
+  m_EditorClassIdentifier: 
+  levelExps:
+  - level: 1
+    requiredExp: 100
+  - level: 2
+    requiredExp: 150
+  - level: 3
+    requiredExp: 200
+  - level: 4
+    requiredExp: 250
+  - level: 5
+    requiredExp: 300
+  - level: 6
+    requiredExp: 350
+  - level: 7
+    requiredExp: 400
+  - level: 8
+    requiredExp: 450
+  - level: 9
+    requiredExp: 500
+  - level: 10
+    requiredExp: 550
+  - level: 11
+    requiredExp: 600
+  - level: 12
+    requiredExp: 650
+  - level: 13
+    requiredExp: 700
+  - level: 14
+    requiredExp: 750
+  - level: 15
+    requiredExp: 800
+  - level: 16
+    requiredExp: 850
+  - level: 17
+    requiredExp: 900
+  - level: 18
+    requiredExp: 950
+  - level: 19
+    requiredExp: 1000
+  - level: 20
+    requiredExp: 1050
+  - level: 21
+    requiredExp: 1100
+  - level: 22
+    requiredExp: 1150
+  - level: 23
+    requiredExp: 1200
+  - level: 24
+    requiredExp: 1250
+  - level: 25
+    requiredExp: 1300
+  - level: 26
+    requiredExp: 1350
+  - level: 27
+    requiredExp: 1400
+  - level: 28
+    requiredExp: 1450
+  - level: 29
+    requiredExp: 1500
+  - level: 30
+    requiredExp: 1550
+  - level: 31
+    requiredExp: 1600
+  - level: 32
+    requiredExp: 1650
+  - level: 33
+    requiredExp: 1700
+  - level: 34
+    requiredExp: 1750
+  - level: 35
+    requiredExp: 1800
+  - level: 36
+    requiredExp: 1850
+  - level: 37
+    requiredExp: 1900
+  - level: 38
+    requiredExp: 1950
+  - level: 39
+    requiredExp: 2000
+  - level: 40
+    requiredExp: 2050
+  - level: 41
+    requiredExp: 2100
+  - level: 42
+    requiredExp: 2150
+  - level: 43
+    requiredExp: 2200
+  - level: 44
+    requiredExp: 2250
+  - level: 45
+    requiredExp: 2300
+  - level: 46
+    requiredExp: 2350
+  - level: 47
+    requiredExp: 2400
+  - level: 48
+    requiredExp: 2450
+  - level: 49
+    requiredExp: 2500
+  - level: 50
+    requiredExp: 2550
+  - level: 51
+    requiredExp: 2600
+  - level: 52
+    requiredExp: 2650
+  - level: 53
+    requiredExp: 2700
+  - level: 54
+    requiredExp: 2750
+  - level: 55
+    requiredExp: 2800
+  - level: 56
+    requiredExp: 2850
+  - level: 57
+    requiredExp: 2900
+  - level: 58
+    requiredExp: 2950
+  - level: 59
+    requiredExp: 3000
+  - level: 60
+    requiredExp: 3050
+  - level: 61
+    requiredExp: 3100
+  - level: 62
+    requiredExp: 3150
+  - level: 63
+    requiredExp: 3200
+  - level: 64
+    requiredExp: 3250
+  - level: 65
+    requiredExp: 3300
+  - level: 66
+    requiredExp: 3350
+  - level: 67
+    requiredExp: 3400
+  - level: 68
+    requiredExp: 3450
+  - level: 69
+    requiredExp: 3500
+  - level: 70
+    requiredExp: 3550
+  - level: 71
+    requiredExp: 3600
+  - level: 72
+    requiredExp: 3650
+  - level: 73
+    requiredExp: 3700
+  - level: 74
+    requiredExp: 3750
+  - level: 75
+    requiredExp: 3800
+  - level: 76
+    requiredExp: 3850
+  - level: 77
+    requiredExp: 3900
+  - level: 78
+    requiredExp: 3950
+  - level: 79
+    requiredExp: 4000
+  - level: 80
+    requiredExp: 4050
+  - level: 81
+    requiredExp: 4100
+  - level: 82
+    requiredExp: 4150
+  - level: 83
+    requiredExp: 4200
+  - level: 84
+    requiredExp: 4250
+  - level: 85
+    requiredExp: 4300
+  - level: 86
+    requiredExp: 4350
+  - level: 87
+    requiredExp: 4400
+  - level: 88
+    requiredExp: 4450
+  - level: 89
+    requiredExp: 4500
+  - level: 90
+    requiredExp: 4550
+  - level: 91
+    requiredExp: 4600
+  - level: 92
+    requiredExp: 4650
+  - level: 93
+    requiredExp: 4700
+  - level: 94
+    requiredExp: 4750
+  - level: 95
+    requiredExp: 4800
+  - level: 96
+    requiredExp: 4850
+  - level: 97
+    requiredExp: 4900
+  - level: 98
+    requiredExp: 4950
+  - level: 99
+    requiredExp: 5000
+  - level: 100
+    requiredExp: 5050

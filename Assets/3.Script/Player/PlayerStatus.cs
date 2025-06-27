@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -19,20 +21,31 @@ public class PlayerStatus : MonoBehaviour
     [Header("Damage Popup")]
     [SerializeField] private GameObject playerDamageUIPrefab;
     [SerializeField] private Transform spriteGroup;
-    [SerializeField] private float popupYOffset = 0.3f; // 오프셋 조절 가능
+    [SerializeField] private float popupYOffset = 0.3f;
+
     [Header("Recovery Settings")]
     [SerializeField] private float hpRecoverAmount = 5f;
     [SerializeField] private float hpRecoverInterval = 3f;
     [SerializeField] private ParticleSystem hpEffect;
 
-
     [SerializeField] private float mpRecoverAmount = 10f;
     [SerializeField] private float mpRecoverInterval = 1f;
+
+    [Header("EXP System")]
+    [SerializeField] private PlayerExpData expData;
+    [SerializeField] private Image expBar;
+    [SerializeField] private TextMeshProUGUI levelText;
+
+    private int level = 1;
+    private int currentExp = 0;
+
     void Start()
     {
         StartCoroutine(HpRecoverRoutine());
         StartCoroutine(MpRecoverRoutine());
+        UpdateExpUI();
     }
+
     private IEnumerator HpRecoverRoutine()
     {
         WaitForSeconds wait = new WaitForSeconds(hpRecoverInterval);
@@ -43,19 +56,15 @@ public class PlayerStatus : MonoBehaviour
             if (currentHP < maxHP)
             {
                 currentHP = Mathf.Min(currentHP + hpRecoverAmount, maxHP);
-
                 if (hpEffect != null)
                 {
                     if (!hpEffect.gameObject.activeSelf)
                         hpEffect.gameObject.SetActive(true);
-
                     hpEffect.Play();
                 }
-
             }
         }
     }
-
 
     private IEnumerator MpRecoverRoutine()
     {
@@ -69,12 +78,6 @@ public class PlayerStatus : MonoBehaviour
                 currentMP = Mathf.Min(currentMP + mpRecoverAmount, maxMP);
             }
         }
-    }
-
-    private void OnValidate()
-    {
-        currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
-        currentMP = Mathf.Clamp(currentMP, 0f, maxMP);
     }
 
     public void TakeDamage(float damage)
@@ -94,9 +97,7 @@ public class PlayerStatus : MonoBehaviour
         Vector3 popupPos = GetPopupPosition();
         GameObject popup = Instantiate(playerDamageUIPrefab, popupPos, Quaternion.identity);
         var popupScript = popup.GetComponent<DamagePopup>();
-        if (popupScript == null)
-            Debug.LogWarning("DamagePopup 스크립트가 프리팹에 없음!");
-        else
+        if (popupScript != null)
             popupScript.Show(damage);
     }
 
@@ -127,6 +128,35 @@ public class PlayerStatus : MonoBehaviour
         }
 
         return transform.position + Vector3.up * 1.5f;
+    }
+
+    public void AddExp(int amount)
+    {
+        currentExp += amount;
+        Debug.Log($"Exp +{amount} ▶ 현재 EXP: {currentExp}");
+
+        while (level < expData.levelExps.Length &&
+               currentExp >= expData.levelExps[level - 1].RequiredExp)
+        {
+            currentExp -= expData.levelExps[level - 1].RequiredExp;
+            level++;
+            Debug.Log($"레벨업! ▶ 현재 레벨: {level}");
+        }
+
+        UpdateExpUI();
+    }
+
+    private void UpdateExpUI()
+    {
+        int maxExp = expData.levelExps[Mathf.Clamp(level - 1, 0, expData.levelExps.Length - 1)].RequiredExp;
+        expBar.fillAmount = (float)currentExp / maxExp;
+        levelText.text = level.ToString();
+    }
+
+    private void OnValidate()
+    {
+        currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
+        currentMP = Mathf.Clamp(currentMP, 0f, maxMP);
     }
 
     [ContextMenu("Take 10 Damage")]
