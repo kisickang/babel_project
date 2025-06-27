@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e968e98486ab4a2458a44dab2032f7ea, type: 3}
   m_Name: Middle_Monster
   m_EditorClassIdentifier: 
+  id: 8
   monsterName: Middle_Monster
   maxHealth: 700
-  moveSpeed: 2
+  moveSpeed: 2.5
   damage: 3
-  dropItems: []
+  dropExpType: 2

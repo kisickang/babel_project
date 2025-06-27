@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e968e98486ab4a2458a44dab2032f7ea, type: 3}
   m_Name: fly_1
   m_EditorClassIdentifier: 
+  id: 6
   monsterName: fly_1
   maxHealth: 500
-  moveSpeed: 2
-  damage: 2
-  dropItems: []
+  moveSpeed: 2.5
+  damage: 3
+  dropExpType: 1

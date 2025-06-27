@@ -611,6 +611,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4b9c4717fa88afa4480e0c63cbce971c, type: 2}
   spriteGroup: {fileID: 2948382941378740715}
+  expSmallPrefab: {fileID: 6066931836331716270, guid: 0928d2ee59f0be249a8dedc51a66cbdf, type: 3}
+  expMediumPrefab: {fileID: 3721181591718892151, guid: 9b827eae85c70f84bb7892ff25f64bbb, type: 3}
+  expLargePrefab: {fileID: 158844417571470321, guid: 4f2d6b7bbe971954cb21b5b89d1ac1b1, type: 3}
   damageUIPrefab: {fileID: 5062117107659624300, guid: 2badda226bf1ab3438460b6b70e71b3b, type: 3}
 --- !u!1 &5670403053653048262
 GameObject:

@@ -2,30 +2,33 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    [Header("몬스터 데이터")]
-    [SerializeField] private MonsterData data;
+    [Header("데이터 설정")]
+    [SerializeField] private MonsterData data; // 직접 연결
 
-    [Header("그래픽 그룹")]
+    [Header("그래픽")]
     [SerializeField] private Transform spriteGroup;
+
+    [Header("드롭 프리팹")]
+    [SerializeField] private GameObject expSmallPrefab;
+    [SerializeField] private GameObject expMediumPrefab;
+    [SerializeField] private GameObject expLargePrefab;
+
+    [SerializeField] private GameObject damageUIPrefab;
 
     private Transform player;
     private Rigidbody2D rb;
-    private SpriteRenderer[] spriteRenderers;
     private int currentHP;
-
-    [SerializeField] private GameObject damageUIPrefab;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         if (spriteGroup == null)
-            Debug.LogWarning("[Monster] spriteGroup이 비어 있습니다.");
+            Debug.LogWarning("[Monster] spriteGroup 미지정");
 
         if (data == null)
         {
-            Debug.LogError("[Monster] MonsterData 연결 안됨");
+            Debug.LogError("[Monster] MonsterData가 연결되지 않았습니다.");
             enabled = false;
             return;
         }
@@ -37,8 +40,8 @@ public class Monster : MonoBehaviour
 
         if (player == null)
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null) player = playerObj.transform;
+            var p = GameObject.FindGameObjectWithTag("Player");
+            if (p) player = p.transform;
         }
     }
 
@@ -56,19 +59,6 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
-            if (playerStatus != null)
-            {
-                Debug.Log($"[히트] Player가 {data.monsterName}에게 {data.damage} 데미지를 입음");
-                playerStatus.TakeDamage(data.damage);
-            }
-        }
-    }
-
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
@@ -83,18 +73,22 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log($"[{data.monsterName}] 사망");
+        DropExp();
+        gameObject.SetActive(false); // 오브젝트 풀 복귀
+    }
 
-        if (data.dropItems != null)
+    private void DropExp()
+    {
+        GameObject prefab = data.dropExpType switch
         {
-            foreach (var item in data.dropItems)
-            {
-                if (item != null)
-                    Instantiate(item, transform.position, Quaternion.identity);
-            }
-        }
+            ExpDropType.Small => expSmallPrefab,
+            ExpDropType.Medium => expMediumPrefab,
+            ExpDropType.Large => expLargePrefab,
+            _ => null
+        };
 
-        gameObject.SetActive(false); // 풀로 복귀
+        if (prefab != null)
+            Instantiate(prefab, transform.position, Quaternion.identity);
     }
 
     private Vector3 GetPopupPosition()
@@ -105,7 +99,6 @@ public class Monster : MonoBehaviour
             Bounds bounds = sr.bounds;
             return new Vector3(bounds.center.x, bounds.max.y + 0.2f, 0f);
         }
-
         return transform.position + Vector3.up * 1.5f;
     }
 }
