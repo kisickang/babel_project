@@ -400,6 +400,7 @@
 "Assets/3.Script/EXP.cs"
 "Assets/3.Script/ExpPoolManager.cs"
 "Assets/3.Script/FanMesh.cs"
+"Assets/3.Script/Lvup/LevelUpPopup.cs"
 "Assets/3.Script/Monster/Monster.cs"
 "Assets/3.Script/Monster/MonsterPoolManager.cs"
 "Assets/3.Script/Monster/MonsterSpawner.cs"

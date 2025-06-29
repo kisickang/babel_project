@@ -85,6 +85,7 @@
     <Compile Include="Assets\3.Script\FanMesh.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\3.Script\Player\StatusUi\RecoveryController.cs" />
+    <Compile Include="Assets\3.Script\Lvup\LevelUpPopup.cs" />
     <Compile Include="Assets\3.Script\Ui\CountdownTimer.cs" />
     <Compile Include="Assets\3.Script\Skills\AxePoolManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />

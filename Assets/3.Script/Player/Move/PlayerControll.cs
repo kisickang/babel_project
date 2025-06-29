@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class PlayerControll : MonoBehaviour
@@ -20,7 +19,7 @@ public class PlayerControll : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange = 5f;
     [SerializeField] private float attackAngle = 60f;
-    [SerializeField] private GameObject fanVisualPrefab; // <-- 수정됨
+    [SerializeField] private GameObject fanVisualPrefab;
 
     [Header("Animation Target")]
     [SerializeField] private Animator spriteAnimator;
@@ -38,7 +37,7 @@ public class PlayerControll : MonoBehaviour
     [SerializeField] private PlayerStatus playerStatus;
 
     private bool isAttacking = false;
-    private bool isFanEffectRunning = false; // 중복 생성 방지용
+    private bool isFanEffectRunning = false;
     private Coroutine attackRoutine;
 
     void Start()
@@ -46,6 +45,7 @@ public class PlayerControll : MonoBehaviour
         if (attackRoutine == null)
             attackRoutine = StartCoroutine(AutoAttackRoutine());
     }
+
     void OnDisable()
     {
         if (attackRoutine != null)
@@ -55,7 +55,6 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,7 +62,6 @@ public class PlayerControll : MonoBehaviour
         if (spriteTransform == null) spriteTransform = transform;
         if (spriteAnimator == null) spriteAnimator = GetComponentInChildren<Animator>();
     }
-
 
     void Update()
     {
@@ -73,7 +71,7 @@ public class PlayerControll : MonoBehaviour
         Vector3 mouseWorld = targetCamera.ScreenToWorldPoint(Input.mousePosition);
         float direction = mouseWorld.x < transform.position.x ? 1f : -1f;
         spriteTransform.localScale = new Vector3(direction, spriteTransform.localScale.y, spriteTransform.localScale.z);
-        // 특수스킬 발동 (우클릭)
+
         if (Input.GetMouseButtonDown(1))
             TryUseSkill();
     }
@@ -91,7 +89,6 @@ public class PlayerControll : MonoBehaviour
             if (spriteAnimator != null)
                 spriteAnimator.SetTrigger("Attack");
 
-            //ApplyAttack();
             yield return new WaitForSeconds(attackInterval);
         }
     }
@@ -136,7 +133,7 @@ public class PlayerControll : MonoBehaviour
 
                 if (angle <= attackAngle / 2f)
                 {
-                    damagedMonsters.Add(monster); // ✅ 이 시점에 추가
+                    damagedMonsters.Add(monster);
                     monster.TakeDamage(attackDamage);
                     Debug.Log($"[Hit] {monster.name} 데미지 적용");
                 }
@@ -146,7 +143,7 @@ public class PlayerControll : MonoBehaviour
 
     private IEnumerator PlayFanVisual()
     {
-        if (isFanEffectRunning) yield break; // 이미 실행 중이면 종료
+        if (isFanEffectRunning) yield break;
         isFanEffectRunning = true;
 
         if (fanVisualPrefab == null || attackPoint == null) yield break;
@@ -165,10 +162,9 @@ public class PlayerControll : MonoBehaviour
             mesh.GenerateFan();
         }
 
-        yield return new WaitForSeconds(0.3f); // 이펙트가 다 끝날 때까지 기다리기
+        yield return new WaitForSeconds(0.3f);
         isFanEffectRunning = false;
     }
-
 
     private IEnumerator DisableEffectAfterSeconds(float seconds)
     {
@@ -191,7 +187,6 @@ public class PlayerControll : MonoBehaviour
             Vector3 spawnPos = projectileSpawnPoint.position;
             Vector3 mousePos = targetCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            // 이펙트 출력 (위치 + 회전 포함)
             PlayAxeThrowFX(spawnPos, mousePos);
 
             Vector2 dir = (mousePos - spawnPos).normalized;
@@ -214,6 +209,7 @@ public class PlayerControll : MonoBehaviour
         if (axeThrowFXObject != null)
             axeThrowFXObject.SetActive(false);
     }
+
     private void PlayAxeThrowFX(Vector3 spawnPos, Vector3 mouseWorld)
     {
         if (axeThrowFXObject == null) return;
@@ -221,22 +217,36 @@ public class PlayerControll : MonoBehaviour
         Vector2 dir = (mouseWorld - spawnPos).normalized;
         float angleZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        // 💡 회전값 먼저 적용
         axeThrowFXObject.transform.rotation = Quaternion.Euler(0, 0, angleZ);
-
-        // 💡 회전 기준으로 오른쪽 방향 * 1.5 만큼 offset
         Vector3 offset = axeThrowFXObject.transform.right * 1.5f;
         Vector3 finalPos = spawnPos + offset;
 
         axeThrowFXObject.transform.position = finalPos;
 
-        axeThrowFXObject.SetActive(false); // 초기화
+        axeThrowFXObject.SetActive(false);
         axeThrowFXObject.SetActive(true);
 
         StartCoroutine(DisableAxeThrowFXAfterDelay());
     }
 
+    // ✅ 추가: 공격력 증가
+    public void IncreaseAttackDamageByPercent(float percent)
+    {
+        attackDamage += Mathf.RoundToInt(attackDamage * percent);
+        Debug.Log($"[레벨업] 공격력 증가됨 → {attackDamage}");
+    }
 
+    // ✅ 추가: 이동속도 증가
+    public void IncreaseMoveSpeedByPercent(float percent)
+    {
+        moveSpeed += moveSpeed * percent;
+        Debug.Log($"[레벨업] 이동속도 증가됨 → {moveSpeed}");
+    }
 
-
+    // ✅ 추가: 공격속도 증가 (공격 간격 줄이기)
+    public void IncreaseAttackSpeedByPercent(float percent)
+    {
+        attackInterval *= (1f - percent); // ex. 0.1f → 10% 빨라짐
+        Debug.Log($"[레벨업] 공격속도 증가됨 (interval: {attackInterval})");
+    }
 }
