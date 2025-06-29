@@ -8,5 +8,6 @@ public class LevelUpSpecialSkill : LevelUpPopup
     {
         var player = FindObjectOfType<PlayerControll>();
         player.IncreaseSpecialSkillPowerByPercent(Percent);
+        player.IncreaseAxeCount(1); // 🪓 개수 +1
     }
 }

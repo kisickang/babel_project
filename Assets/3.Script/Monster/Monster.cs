@@ -58,6 +58,18 @@ public class Monster : MonoBehaviour
             spriteGroup.localScale = new Vector3(scaleX, 1f, 1f);
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
+            if (playerStatus != null)
+            {
+                playerStatus.TakeDamage(data.damage); // ✅ 이제 data.damage 사용
+                Debug.Log($"[Monster] 플레이어에게 {data.damage} 데미지 줌!");
+            }
+        }
+    }
 
     public void TakeDamage(int damage)
     {

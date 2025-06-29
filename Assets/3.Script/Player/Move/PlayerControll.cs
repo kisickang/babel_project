@@ -42,7 +42,7 @@ public class PlayerControll : MonoBehaviour
 
     [SerializeField] private PlayerStatus playerStatus;
 
-    [SerializeField] private float specialSkillMultiplier = 1f;
+    public float specialSkillMultiplier = 1f;
 
     private bool isAttacking = false;
     private bool isFanEffectRunning = false;
@@ -148,7 +148,7 @@ public class PlayerControll : MonoBehaviour
                 {
                     damagedMonsters.Add(monster);
                     monster.TakeDamage(CurrentAttackDamage);
-                   // Debug.Log($"[Hit] {monster.name} 데미지 적용");
+                    // Debug.Log($"[Hit] {monster.name} 데미지 적용");
                 }
             }
         }
@@ -199,22 +199,32 @@ public class PlayerControll : MonoBehaviour
 
             Vector3 spawnPos = projectileSpawnPoint.position;
             Vector3 mousePos = targetCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 baseDir = (mousePos - spawnPos).normalized;
+
+            float spreadAngle = 30f; // 전체 부채꼴 각도
+            float angleStep = (axeCount > 1) ? spreadAngle / (axeCount - 1) : 0f;
+            float startAngle = -spreadAngle / 2f;
+
+            for (int i = 0; i < axeCount; i++)
+            {
+                float angle = startAngle + angleStep * i;
+                Vector2 rotatedDir = Quaternion.Euler(0, 0, angle) * baseDir;
+
+                GameObject proj = AxePoolManager.Instance.Get();
+                proj.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
+                proj.SetActive(true);
+
+                proj.GetComponent<ProjectileAxe>().Initialize(rotatedDir, projectileSpeed, CurrentAttackDamage * specialSkillMultiplier);
+            }
 
             PlayAxeThrowFX(spawnPos, mousePos);
-
-            Vector2 dir = (mousePos - spawnPos).normalized;
-
-            GameObject proj = AxePoolManager.Instance.Get();
-            proj.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
-            proj.SetActive(true);
-
-            proj.GetComponent<ProjectileAxe>().Initialize(dir, projectileSpeed, CurrentAttackDamage * specialSkillMultiplier);
         }
         else
         {
             Debug.Log("마나 부족!");
         }
     }
+
 
     private IEnumerator DisableAxeThrowFXAfterDelay()
     {
@@ -266,9 +276,22 @@ public class PlayerControll : MonoBehaviour
         Debug.Log($"[레벨업] 공격 범위 증가됨 → {CurrentAttackRange}");
     }
 
+
     public void IncreaseSpecialSkillPowerByPercent(float percent)
     {
         specialSkillMultiplier += percent;
         Debug.Log($"[레벨업] 특수스킬 배율 증가됨 → {specialSkillMultiplier}");
+    }
+    public float GetSpecialSkillDamage(float baseDamage)
+    {
+        return baseDamage * specialSkillMultiplier;
+    }
+    [SerializeField] private int axeCount = 1; // 레벨업 시 증가
+    private const int MaxAxeCount = 10;
+
+    public void IncreaseAxeCount(int amount)
+    {
+        axeCount = Mathf.Min(axeCount + amount, MaxAxeCount);
+        Debug.Log($"[레벨업] 도끼 개수 증가됨 → {axeCount}");
     }
 }

@@ -42,6 +42,7 @@ public class PlayerStatus : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject levelUpPopupPanel;
+    [SerializeField] private Image hpBar; // ✅ 추가: HP 바 이미지
 
     private int level = 1;
     private int currentExp = 0;
@@ -51,6 +52,7 @@ public class PlayerStatus : MonoBehaviour
         StartCoroutine(HpRecoverRoutine());
         StartCoroutine(MpRecoverRoutine());
         UpdateExpUI();
+        UpdateHPUI(); // ✅ 시작 시 HP UI 초기화
     }
 
     private IEnumerator HpRecoverRoutine()
@@ -63,6 +65,8 @@ public class PlayerStatus : MonoBehaviour
             if (currentHP < maxHP)
             {
                 currentHP = Mathf.Min(currentHP + hpRecoverAmount, maxHP);
+                UpdateHPUI(); // ✅ 회복 시 HP UI 갱신
+
                 if (hpEffect != null)
                 {
                     if (!hpEffect.gameObject.activeSelf)
@@ -83,14 +87,24 @@ public class PlayerStatus : MonoBehaviour
             if (currentMP < maxMP)
             {
                 currentMP = Mathf.Min(currentMP + mpRecoverAmount, maxMP);
+                // MP는 이펙트 없음
             }
         }
     }
 
     public void TakeDamage(float damage)
     {
+        Debug.Log($"[PlayerStatus] 데미지 {damage} 받음! (현재 HP: {currentHP})");
+
         currentHP = Mathf.Max(currentHP - damage, 0f);
         ShowDamagePopup((int)damage);
+        UpdateHPUI();
+    }
+
+    private void UpdateHPUI() // ✅ 추가된 함수
+    {
+        if (hpBar != null)
+            hpBar.fillAmount = currentHP / maxHP;
     }
 
     private void ShowDamagePopup(int damage)
@@ -112,7 +126,7 @@ public class PlayerStatus : MonoBehaviour
     {
         if (spriteGroup == null)
         {
-            Debug.LogWarning("spriteGroup이 비역 있음");
+            Debug.LogWarning("spriteGroup이 비어 있음");
             return transform.position + Vector3.up * 1.5f;
         }
 
@@ -140,8 +154,6 @@ public class PlayerStatus : MonoBehaviour
     public void AddExp(int amount)
     {
         currentExp += amount;
-       // Debug.Log($"Exp +{amount} ▶ 현재 EXP: {currentExp}");
-       // Debug.Log($"레벨업! ➤ 현재 레벨: {level} (Frame: {Time.frameCount})");
 
         while (level < expData.levelExps.Length &&
                currentExp >= expData.levelExps[level - 1].RequiredExp)
@@ -156,11 +168,7 @@ public class PlayerStatus : MonoBehaviour
                 levelUpEffect.SetActive(true);
                 Invoke(nameof(DisableLevelUpEffect), levelUpEffectDuration);
             }
-            // 💡 팝업 UI 랜덤 선택
-            //FindObjectOfType<LevelUpManager>()?.ShowRandomPopups();
 
-
-            // 프리파브 UI 화면 표시
             if (levelUpPopupPanel != null)
             {
                 Time.timeScale = 0f;
@@ -194,5 +202,9 @@ public class PlayerStatus : MonoBehaviour
     public void DebugDamage() => TakeDamage(10f);
 
     [ContextMenu("Recover 10 HP")]
-    public void DebugHeal() => currentHP = Mathf.Min(currentHP + 10f, maxHP);
+    public void DebugHeal()
+    {
+        currentHP = Mathf.Min(currentHP + 10f, maxHP);
+        UpdateHPUI(); // 디버그 회복 시에도 갱신
+    }
 }

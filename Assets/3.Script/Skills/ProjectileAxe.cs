@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileAxe : MonoBehaviour
 {
-    [SerializeField] private Transform spriteGroup; // ← Sprite 그룹만 회전
+    [SerializeField] private Transform spriteGroup;
     [SerializeField] private Transform trailFX;
 
     private Vector2 direction;
@@ -11,6 +12,8 @@ public class ProjectileAxe : MonoBehaviour
     private float lifetime = 1.5f;
     private float rotateSpeed = 720f;
     private Rigidbody2D rb;
+
+    private HashSet<Monster> damagedMonsters = new();  // 💥 중복 히트 방지
 
     void Awake()
     {
@@ -25,11 +28,11 @@ public class ProjectileAxe : MonoBehaviour
 
         transform.position = transform.position;
 
+        damagedMonsters.Clear(); // 💥 재사용 시 초기화
+
         if (trailFX != null)
         {
             trailFX.position = transform.position;
-
-            // 🔥 방향 회전 적용 (Z축 회전)
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             trailFX.rotation = Quaternion.Euler(0f, 0f, angle);
 
@@ -45,26 +48,24 @@ public class ProjectileAxe : MonoBehaviour
         Invoke(nameof(DisableSelf), lifetime);
     }
 
-
-
-
     void Update()
     {
         if (spriteGroup != null)
             spriteGroup.Rotate(Vector3.forward, -rotateSpeed * Time.deltaTime);
 
         if (trailFX != null)
-            trailFX.position = spriteGroup.position; // 따라붙게
+            trailFX.position = spriteGroup.position;
     }
-
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Monster monster = collision.GetComponent<Monster>();
-        if (monster != null)
+        Monster monster = collision.GetComponentInParent<Monster>();
+        if (monster != null && !damagedMonsters.Contains(monster))
         {
-            monster.TakeDamage((int)damage);
-            DisableSelf();
+            float finalDamage = FindObjectOfType<PlayerControll>().GetSpecialSkillDamage(damage);
+            monster.TakeDamage(Mathf.RoundToInt(finalDamage));
+            damagedMonsters.Add(monster); // 💥 같은 몬스터 중복 방지
+            Debug.Log($"[도끼] {monster.name}에게 {finalDamage} 데미지 관통 적용됨");
         }
     }
 
@@ -77,5 +78,6 @@ public class ProjectileAxe : MonoBehaviour
     void OnDisable()
     {
         CancelInvoke();
+        damagedMonsters.Clear(); // 풀링 재사용 시 초기화
     }
 }

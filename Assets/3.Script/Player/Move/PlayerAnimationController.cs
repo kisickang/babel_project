@@ -8,11 +8,11 @@ namespace PlayerAnimation
         [SerializeField] private Rigidbody2D rb;
         private Animator anim;
 
-        private static readonly int WalkHash = Animator.StringToHash("Walk");
+        private static readonly int RunHash = Animator.StringToHash("Run");
         private static readonly int AttackTriggerHash = Animator.StringToHash("Attack");
 
         [Header("Auto Attack Settings")]
-        [SerializeField] private float attackInterval = 1f; // 공격 간격 (초)
+        [SerializeField] private float attackInterval = 1f; // 공격 간격
 
         private float attackTimer;
 
@@ -25,11 +25,16 @@ namespace PlayerAnimation
 
         void Update()
         {
-            // 걷기 애니메이션 처리
-            bool isWalking = rb.velocity.sqrMagnitude > 0.01f;
-            anim.SetBool(WalkHash, isWalking);
+            float moveSpeed = rb.velocity.magnitude;
 
-            // 자동 공격 타이머
+            // 1. Run 애니메이션 여부
+            bool isRunning = moveSpeed > 0.01f;
+            anim.SetBool(RunHash, isRunning);
+
+            // 2. 이동 속도를 애니메이션 Speed_Move 파라미터에 전달
+            anim.SetFloat("Speed_Move", moveSpeed);
+
+            // 3. 자동 공격
             attackTimer += Time.deltaTime;
             if (attackTimer >= attackInterval)
             {
@@ -37,6 +42,7 @@ namespace PlayerAnimation
                 attackTimer = 0f;
             }
         }
+
 
         public void TriggerAttackAnimation()
         {
