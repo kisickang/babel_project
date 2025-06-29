@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 670598269353994937}
   - component: {fileID: 8115196938151462414}
   - component: {fileID: 460258754672085873}
-  - component: {fileID: 2243666692811822180}
+  - component: {fileID: 8097693946040165819}
   m_Layer: 5
   m_Name: SkillDamage
   m_TagString: Untagged
@@ -122,20 +122,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8115196938151462414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2243666692811822180}
-        m_TargetAssemblyTypeName: LevelUpPopup, Assembly-CSharp
-        m_MethodName: ApplyEffect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2243666692811822180
+      m_Calls: []
+--- !u!114 &8097693946040165819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,9 +132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 180312319033431142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7e39d13372c7b4c9104698884bac0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f492d7d8d8e91f4eb89818e008f1c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Percent: 0.1
 --- !u!1 &384144113194189779
 GameObject:
   m_ObjectHideFlags: 0

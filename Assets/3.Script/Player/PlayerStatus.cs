@@ -140,8 +140,8 @@ public class PlayerStatus : MonoBehaviour
     public void AddExp(int amount)
     {
         currentExp += amount;
-        Debug.Log($"Exp +{amount} ▶ 현재 EXP: {currentExp}");
-        Debug.Log($"레벨업! ➤ 현재 레벨: {level} (Frame: {Time.frameCount})");
+       // Debug.Log($"Exp +{amount} ▶ 현재 EXP: {currentExp}");
+       // Debug.Log($"레벨업! ➤ 현재 레벨: {level} (Frame: {Time.frameCount})");
 
         while (level < expData.levelExps.Length &&
                currentExp >= expData.levelExps[level - 1].RequiredExp)

@@ -5,19 +5,25 @@ using UnityEngine;
 public class PlayerControll : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float baseMoveSpeed = 5f;
+    private float moveSpeedMultiplier = 1f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
     [Header("Attack Settings")]
-    [SerializeField] private int attackDamage = 100;
-    [SerializeField] private float attackInterval = 3f;
+    [SerializeField] private int baseAttackDamage = 100;
+    private float attackDamageMultiplier = 1f;
+
+    [SerializeField] private float baseAttackInterval = 3f;
+    private float attackIntervalMultiplier = 1f;
+
     [SerializeField] private GameObject attackEffectInstance;
     [SerializeField] private Transform attackEffectSpawnPoint;
 
     [Header("Attack Area (Fan Shape)")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float baseAttackRange = 5f;
+    private float attackRangeMultiplier = 1f;
     [SerializeField] private float attackAngle = 60f;
     [SerializeField] private GameObject fanVisualPrefab;
 
@@ -36,9 +42,16 @@ public class PlayerControll : MonoBehaviour
 
     [SerializeField] private PlayerStatus playerStatus;
 
+    [SerializeField] private float specialSkillMultiplier = 1f;
+
     private bool isAttacking = false;
     private bool isFanEffectRunning = false;
     private Coroutine attackRoutine;
+
+    private int CurrentAttackDamage => Mathf.RoundToInt(baseAttackDamage * attackDamageMultiplier);
+    private float CurrentMoveSpeed => baseMoveSpeed * moveSpeedMultiplier;
+    private float CurrentAttackInterval => baseAttackInterval * attackIntervalMultiplier;
+    private float CurrentAttackRange => baseAttackRange * attackRangeMultiplier;
 
     void Start()
     {
@@ -78,7 +91,7 @@ public class PlayerControll : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = moveInput.normalized * moveSpeed;
+        rb.velocity = moveInput.normalized * CurrentMoveSpeed;
     }
 
     private IEnumerator AutoAttackRoutine()
@@ -89,13 +102,13 @@ public class PlayerControll : MonoBehaviour
             if (spriteAnimator != null)
                 spriteAnimator.SetTrigger("Attack");
 
-            yield return new WaitForSeconds(attackInterval);
+            yield return new WaitForSeconds(CurrentAttackInterval);
         }
     }
 
     public void ApplyAttack()
     {
-        Debug.Log($"[AttackLog] 공격 발생! 데미지: {attackDamage}");
+        //Debug.Log($"[AttackLog] 공격 발생! 데미지: {CurrentAttackDamage}");
         PerformFanShapedAttack();
         StartCoroutine(PlayFanVisual());
 
@@ -120,7 +133,7 @@ public class PlayerControll : MonoBehaviour
         Vector2 mouseWorld = targetCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 forward = (mouseWorld - origin).normalized;
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackRange);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, CurrentAttackRange);
         HashSet<Monster> damagedMonsters = new HashSet<Monster>();
 
         foreach (var hit in hits)
@@ -134,8 +147,8 @@ public class PlayerControll : MonoBehaviour
                 if (angle <= attackAngle / 2f)
                 {
                     damagedMonsters.Add(monster);
-                    monster.TakeDamage(attackDamage);
-                    Debug.Log($"[Hit] {monster.name} 데미지 적용");
+                    monster.TakeDamage(CurrentAttackDamage);
+                   // Debug.Log($"[Hit] {monster.name} 데미지 적용");
                 }
             }
         }
@@ -156,7 +169,7 @@ public class PlayerControll : MonoBehaviour
         FanMesh mesh = visual.GetComponent<FanMesh>();
         if (mesh != null)
         {
-            mesh.radius = attackRange;
+            mesh.radius = CurrentAttackRange;
             mesh.angle = attackAngle;
             mesh.duration = 0.25f;
             mesh.GenerateFan();
@@ -195,7 +208,7 @@ public class PlayerControll : MonoBehaviour
             proj.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
             proj.SetActive(true);
 
-            proj.GetComponent<ProjectileAxe>().Initialize(dir, projectileSpeed, attackDamage * specialSkillMultiplier);
+            proj.GetComponent<ProjectileAxe>().Initialize(dir, projectileSpeed, CurrentAttackDamage * specialSkillMultiplier);
         }
         else
         {
@@ -229,37 +242,33 @@ public class PlayerControll : MonoBehaviour
         StartCoroutine(DisableAxeThrowFXAfterDelay());
     }
 
-    // ✅ 추가: 공격력 증가
     public void IncreaseAttackDamageByPercent(float percent)
     {
-        attackDamage += Mathf.RoundToInt(attackDamage * percent);
-        Debug.Log($"[레벨업] 공격력 증가됨 → {attackDamage}");
+        Debug.Log($"[레벨업] 호출됨 - base: {baseAttackDamage}, multiplier: {attackDamageMultiplier}, percent: {percent}");
+        attackDamageMultiplier += percent;
+        Debug.Log($"[레벨업] 증가 후 → 데미지: {CurrentAttackDamage}, multiplier: {attackDamageMultiplier}");
     }
-
-    // ✅ 추가: 이동속도 증가
     public void IncreaseMoveSpeedByPercent(float percent)
     {
-        moveSpeed += moveSpeed * percent;
-        Debug.Log($"[레벨업] 이동속도 증가됨 → {moveSpeed}");
+        moveSpeedMultiplier += percent;
+        Debug.Log($"[레벨업] 이동속도 증가됨 → {CurrentMoveSpeed}");
     }
 
-    // ✅ 추가: 공격속도 증가 (공격 간격 줄이기)
     public void IncreaseAttackSpeedByPercent(float percent)
     {
-        attackInterval *= (1f - percent); // ex. 0.1f → 10% 빨라짐
-        Debug.Log($"[레벨업] 공격속도 증가됨 (interval: {attackInterval})");
+        attackIntervalMultiplier *= (1f - percent);
+        Debug.Log($"[레벨업] 공격속도 증가됨 (interval: {CurrentAttackInterval})");
     }
+
     public void IncreaseAttackRangeByPercent(float percent)
     {
-        attackRange += attackRange * percent;
-        Debug.Log($"[레벨업] 공격 범위 증가됨 → {attackRange}");
+        attackRangeMultiplier += percent;
+        Debug.Log($"[레벨업] 공격 범위 증가됨 → {CurrentAttackRange}");
     }
-    [SerializeField] private float specialSkillMultiplier = 2f; // 기본값 2배
 
     public void IncreaseSpecialSkillPowerByPercent(float percent)
     {
-        specialSkillMultiplier += specialSkillMultiplier * percent;
+        specialSkillMultiplier += percent;
         Debug.Log($"[레벨업] 특수스킬 배율 증가됨 → {specialSkillMultiplier}");
     }
-
 }

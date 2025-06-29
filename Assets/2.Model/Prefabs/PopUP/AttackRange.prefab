@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7043833011631392187}
   - component: {fileID: 8241217563862211206}
   - component: {fileID: 492388579050407409}
-  - component: {fileID: 5685364051708455051}
+  - component: {fileID: -1880567127579455902}
   m_Layer: 5
   m_Name: AttackRange
   m_TagString: Untagged
@@ -122,20 +122,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8241217563862211206}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5685364051708455051}
-        m_TargetAssemblyTypeName: LevelUpPopup, Assembly-CSharp
-        m_MethodName: ApplyEffect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5685364051708455051
+      m_Calls: []
+--- !u!114 &-1880567127579455902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,9 +132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2348264331000759880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7e39d13372c7b4c9104698884bac0e, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf0b4f964148f848bce081c82ddd1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagePercent: 0.1
 --- !u!1 &4369847771915806413
 GameObject:
   m_ObjectHideFlags: 0

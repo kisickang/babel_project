@@ -407,7 +407,6 @@ MonoBehaviour:
   popupPrefabs:
   - {fileID: 1411554936792932778, guid: 77b13869c91a85e44997ee7b14a937e9, type: 3}
   - {fileID: 2348264331000759880, guid: 8330d56ba9ea9b54dafa596939128b9d, type: 3}
-  - {fileID: 4188029798738168338, guid: 7f4ca180ef733814caeadb81f447769f, type: 3}
   - {fileID: 6157886491648801431, guid: f1f95bb6dc7497945ace47a1e1f0c40b, type: 3}
   - {fileID: 2205908193917725177, guid: 10ba7243d5072d7469fe327b5c7b367f, type: 3}
   - {fileID: 180312319033431142, guid: 5c5829fbc92e1b7409df92b592f2248d, type: 3}
@@ -2870,13 +2869,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9c01ee7bbac9f4180c9284e617dbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  attackDamage: 500
-  attackInterval: 1
+  baseMoveSpeed: 3
+  baseAttackDamage: 100
+  baseAttackInterval: 3
   attackEffectInstance: {fileID: 3076111240843202352}
   attackEffectSpawnPoint: {fileID: 5156517300379306648}
   attackPoint: {fileID: 561599457433601737}
-  attackRange: 5
+  baseAttackRange: 5
   attackAngle: 60
   fanVisualPrefab: {fileID: 3981099373801053164, guid: 191e8a414895e6d42bd596d777237077, type: 3}
   spriteAnimator: {fileID: 670500353808147523}
