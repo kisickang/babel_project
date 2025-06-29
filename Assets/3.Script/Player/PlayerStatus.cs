@@ -36,6 +36,10 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private Image expBar;
     [SerializeField] private TextMeshProUGUI levelText;
 
+    [Header("FX")]
+    [SerializeField] private GameObject levelUpEffect;
+    [SerializeField] private float levelUpEffectDuration = 1.5f;
+
     private int level = 1;
     private int currentExp = 0;
 
@@ -141,9 +145,23 @@ public class PlayerStatus : MonoBehaviour
             currentExp -= expData.levelExps[level - 1].RequiredExp;
             level++;
             Debug.Log($"레벨업! ▶ 현재 레벨: {level}");
+
+            // 💥 레벨업 이펙트
+            if (levelUpEffect != null)
+            {
+                levelUpEffect.SetActive(false); // 중복 방지
+                levelUpEffect.SetActive(true);
+                Invoke(nameof(DisableLevelUpEffect), levelUpEffectDuration);
+            }
         }
 
         UpdateExpUI();
+    }
+
+    private void DisableLevelUpEffect()
+    {
+        if (levelUpEffect != null)
+            levelUpEffect.SetActive(false);
     }
 
     private void UpdateExpUI()

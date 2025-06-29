@@ -958,7 +958,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.65
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2383,9 +2383,11 @@ MonoBehaviour:
   hpEffect: {fileID: 4571377770846977929}
   mpRecoverAmount: 10
   mpRecoverInterval: 1
-  expData: {fileID: 0}
-  expBar: {fileID: 0}
-  levelText: {fileID: 0}
+  expData: {fileID: 11400000, guid: 4dc91a02b61b65947bf409e84ceff160, type: 2}
+  expBar: {fileID: 914655055}
+  levelText: {fileID: 4753794836140281719}
+  levelUpEffect: {fileID: 30720576135088096}
+  levelUpEffectDuration: 1.5
 --- !u!1 &548570879280680747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,7 +2567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  attackDamage: 100
+  attackDamage: 500
   attackInterval: 1
   attackEffectInstance: {fileID: 3076111240843202352}
   attackEffectSpawnPoint: {fileID: 5156517300379306648}

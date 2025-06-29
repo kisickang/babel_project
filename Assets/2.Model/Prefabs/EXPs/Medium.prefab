@@ -99,3 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   expValue: 50
+  attractRange: 2
+  moveSpeed: 10
