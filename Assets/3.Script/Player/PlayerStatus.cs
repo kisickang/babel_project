@@ -97,7 +97,7 @@ public class PlayerStatus : MonoBehaviour
     {
         if (playerDamageUIPrefab == null)
         {
-            Debug.LogWarning("PlayerDamageUIPrefab이 비역 있음!");
+            Debug.LogWarning("PlayerDamageUIPrefab이 비어 있음!");
             return;
         }
 
@@ -141,6 +141,7 @@ public class PlayerStatus : MonoBehaviour
     {
         currentExp += amount;
         Debug.Log($"Exp +{amount} ▶ 현재 EXP: {currentExp}");
+        Debug.Log($"레벨업! ➤ 현재 레벨: {level} (Frame: {Time.frameCount})");
 
         while (level < expData.levelExps.Length &&
                currentExp >= expData.levelExps[level - 1].RequiredExp)
@@ -155,6 +156,9 @@ public class PlayerStatus : MonoBehaviour
                 levelUpEffect.SetActive(true);
                 Invoke(nameof(DisableLevelUpEffect), levelUpEffectDuration);
             }
+            // 💡 팝업 UI 랜덤 선택
+            //FindObjectOfType<LevelUpManager>()?.ShowRandomPopups();
+
 
             // 프리파브 UI 화면 표시
             if (levelUpPopupPanel != null)

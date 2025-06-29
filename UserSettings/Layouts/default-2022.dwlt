@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 23454
+  controlID: 30035
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 23372
+  controlID: 29945
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -773,9 +773,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 960, y: 540, z: 0}
+    m_Target: {x: 911.1867, y: 453.06903, z: -9.658125}
     speed: 2
-    m_Value: {x: 960, y: 540, z: 0}
+    m_Value: {x: 911.1867, y: 453.06903, z: -9.658125}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -825,9 +825,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1101.4536
+    m_Target: 1036.5228
     speed: 2
-    m_Value: 1101.4536
+    m_Value: 1036.5228
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -897,6 +897,7 @@ MonoBehaviour:
     - {fileID: 1107281770626461459, guid: f904dd0bf7ef621498614d7b00a3ccf8, type: 2}
     - {fileID: -1864663853182909474, guid: 38d1fe5476980534796c196d7c27e3b3, type: 2}
     - {fileID: 1107127291259837240, guid: b8e94efcce1b62f4caab8af46f272ecf, type: 2}
+    - {fileID: 1107973034040922039, guid: 51df1150c0de36e45b797e97ee1e166d, type: 2}
     m_ValueSerializationHelper:
     - e00: 1
       e01: 0
@@ -1042,10 +1043,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: f904dd0bf7ef621498614d7b00a3ccf8, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 51df1150c0de36e45b797e97ee1e166d, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107281770626461459, guid: f904dd0bf7ef621498614d7b00a3ccf8, type: 2}
+  - m_Target: {fileID: 1107973034040922039, guid: 51df1150c0de36e45b797e97ee1e166d, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1097,7 +1114,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 8c8effff2ca2ffff58bdffffd2c3ffff1addffffa6f0ffffd2f7ffff1afbffffca9600003a970000309900007699000084990000f09900006e9a00007e9a0000d4a20000381c0100de1c0100be1d0100
+      m_ExpandedIDs: a0c8ffff0cc9ffffc68c0000848d0000928d0000008e0000848e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1166,7 +1183,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3.Script/Player
+    - Assets/2.Model/Prefabs/PopUP
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1174,16 +1191,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 74
   m_LastFolders:
-  - Assets/3.Script/Player
+  - Assets/2.Model/Prefabs/PopUP
   m_LastFoldersGridSize: 74
   m_LastProjectPath: D:\Unity_Projects\babel_project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6e930000
-    m_LastClickedID: 37742
-    m_ExpandedIDs: 000000003a9300005293000000ca9a3b
+    m_SelectedIDs: 009b0000
+    m_LastClickedID: 39680
+    m_ExpandedIDs: 000000007293000088930000f89a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1211,7 +1228,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003a93000000ca9a3b
+    m_ExpandedIDs: 000000007293000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1304,7 +1321,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: -253
+    m_CachedPref: 253
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1

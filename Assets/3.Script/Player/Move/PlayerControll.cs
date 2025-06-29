@@ -178,7 +178,7 @@ public class PlayerControll : MonoBehaviour
         Debug.Log("공격 사운드 실행");
     }
 
-    void TryUseSkill()
+    public void TryUseSkill()
     {
         if (playerStatus.CurrentMP >= 30f)
         {
@@ -195,7 +195,7 @@ public class PlayerControll : MonoBehaviour
             proj.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
             proj.SetActive(true);
 
-            proj.GetComponent<ProjectileAxe>().Initialize(dir, projectileSpeed, attackDamage * 2);
+            proj.GetComponent<ProjectileAxe>().Initialize(dir, projectileSpeed, attackDamage * specialSkillMultiplier);
         }
         else
         {
@@ -249,4 +249,17 @@ public class PlayerControll : MonoBehaviour
         attackInterval *= (1f - percent); // ex. 0.1f → 10% 빨라짐
         Debug.Log($"[레벨업] 공격속도 증가됨 (interval: {attackInterval})");
     }
+    public void IncreaseAttackRangeByPercent(float percent)
+    {
+        attackRange += attackRange * percent;
+        Debug.Log($"[레벨업] 공격 범위 증가됨 → {attackRange}");
+    }
+    [SerializeField] private float specialSkillMultiplier = 2f; // 기본값 2배
+
+    public void IncreaseSpecialSkillPowerByPercent(float percent)
+    {
+        specialSkillMultiplier += specialSkillMultiplier * percent;
+        Debug.Log($"[레벨업] 특수스킬 배율 증가됨 → {specialSkillMultiplier}");
+    }
+
 }

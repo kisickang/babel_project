@@ -1,21 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUpPopup : MonoBehaviour
+public abstract class LevelUpPopup : MonoBehaviour
 {
-    private void Awake()
+    protected virtual void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(ApplyEffect);
+        GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
-    public void ApplyEffect()
+    private void OnClick()
     {
-        // 공격력 10% 증가
-        var player = FindObjectOfType<PlayerControll>();
-        player.IncreaseAttackDamageByPercent(0.1f);
-
-        // 팝업 닫기
-        transform.parent.gameObject.SetActive(false);
-        Time.timeScale = 1f;
+        ApplyEffect();                         // 자식 클래스에서 효과 적용
+        LevelUpManager.InvokePopupSelected();  // ✅ 안전한 방식으로 이벤트 호출
     }
+
+    protected abstract void ApplyEffect();     // 각 스킬 팝업이 구현할 메서드
 }
